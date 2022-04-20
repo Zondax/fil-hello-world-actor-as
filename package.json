@@ -1,0 +1,36 @@
+{
+  "name": "fil-hello-world-actor-as",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests",
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "start": "npx serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zondax/fil-hello-world-actor-as.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zondax/fil-hello-world-actor-as/issues"
+  },
+  "homepage": "https://github.com/Zondax/fil-hello-world-actor-as#readme",
+  "dependencies": {
+    "assemblyscript": "^0.20.4"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.20.4"
+  }
+}
