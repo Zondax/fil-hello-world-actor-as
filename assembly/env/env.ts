@@ -1,6 +1,6 @@
 import {IpldOpen, IpldStat, ResolveAddress, Send, TokenAmount, VerifyConsensusFault} from "./types"
 
-export namespace sys {
+export namespace env {
     // #######
     // # Gas #
     // #######
@@ -661,5 +661,6 @@ export namespace sys {
     /// # Errors
     ///
     /// None. This function doesn't return.
-    export declare function abort(code: u32, message_off: u8, message_len: u32):void;
+    @external("vm", "abort")
+    export declare function abort(code: u32, message_off: u8, message_len: u32):u32;
 }
