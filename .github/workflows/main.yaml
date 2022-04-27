@@ -6,8 +6,6 @@ jobs:
   build:
     timeout-minutes: 5
     runs-on: ubuntu-latest
-    container:
-      image: harbor.zondax.net/zondax/filecoin-node-devnet:dev_experimental-fmv-m2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,4 +20,3 @@ jobs:
           npm install -g yarn
       - run: yarn install
       - run: yarn asbuild
-      - run: lotus chain install-actor build/release.wasm
