@@ -1,0 +1,25 @@
+name: Build
+on:
+  - push
+
+jobs:
+  build:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    container:
+      image: harbor.zondax.net/zondax/filecoin-node-devnet:dev_experimental-fmv-m2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
+      - name: Install yarn
+        run: |
+          npm install -g yarn
+      - run: yarn install
+      - run: yarn asbuild
+      - run: lotus chain install-actor build/release.wasm
