@@ -1,9 +1,6 @@
 /// Identifier for Actors, includes builtin and initialized actors
 export type ActorID = u64;
 
-/// BlockID representing nil parameters or return data.
-export const NO_DATA_BLOCK_ID: u32 = 0;
-
 export class TokenAmount {
     lo: u64
     hi: u64

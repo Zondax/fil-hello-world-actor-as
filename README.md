@@ -1,12 +1,29 @@
 # fil-hello-world-actor-as
 
+---
+---
+
+## Docs 
+
 ### FVM Syscall bindings
 
-https://github.com/filecoin-project/ref-fvm/blob/8799f1d94b2976445e19b1032ab1c8adc26671b4/fvm/src/syscalls/mod.rs#L101-L184
+- https://github.com/filecoin-project/ref-fvm/blob/8799f1d94b2976445e19b1032ab1c8adc26671b4/fvm/src/syscalls/mod.rs#L101-L184
 
 ### SDK Syscall definitions
 
-https://github.com/filecoin-project/ref-fvm/tree/7aee08fc0eb6fd1b2b41b7ef99ebfc8be64c96c6/sdk/src/sys
+- https://github.com/filecoin-project/ref-fvm/tree/7aee08fc0eb6fd1b2b41b7ef99ebfc8be64c96c6/sdk/src/sys
+
+### SDK Syscall Specs
+
+- https://github.com/filecoin-project/fvm-specs/blob/main/08-syscalls.md
+
+### Rust example: Hello world
+
+- https://github.com/raulk/fil-hello-world-actor
+
+---
+
+# Tests 
 
 ### To test it:
 

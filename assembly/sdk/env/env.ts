@@ -34,7 +34,7 @@ export namespace env {
     ///
     /// None
     @external("message", "caller")
-    export declare function caller(): u64;
+    export declare function caller(respPrt: isize): isize;
 
     /// Returns the receiver's actor ID (i.e. ourselves).
     ///
@@ -42,7 +42,7 @@ export namespace env {
     ///
     /// None
     @external("message", "receiver")
-    export declare function receiver(): u64;
+    export declare function receiver(respPrt: isize): isize;
 
     /// Returns the method number from the message.
     ///
@@ -50,7 +50,7 @@ export namespace env {
     ///
     /// None
     @external("message", "method_number")
-    export declare function method_number(): u64;
+    export declare function method_number(respPrt: isize): isize;
 
     /// Returns the value that was received.
     ///
@@ -187,6 +187,7 @@ export namespace env {
     /// | Error               | Reason                                               |
     /// |---------------------|------------------------------------------------------|
     /// | [`IllegalArgument`] | signature, address, or plaintext buffers are invalid |
+    @external("crypto", "verify_signature")
     export declare function verify_signature(
         sig_off: u8,
         sig_len: u32,
@@ -209,6 +210,7 @@ export namespace env {
     /// | Error               | Reason                                          |
     /// |---------------------|-------------------------------------------------|
     /// | [`IllegalArgument`] | the input buffer does not point to valid memory |
+    @external("crypto", "hash_blake2b")
     export declare function hash_blake2b(
         data_off: u8,
         data_len: u32,
@@ -233,6 +235,7 @@ export namespace env {
     /// | Error               | Reason                   |
     /// |---------------------|--------------------------|
     /// | [`IllegalArgument`] | an argument is malformed |
+    @external("crypto", "compute_unsealed_sector_cid")
     export declare function compute_unsealed_sector_cid(
         proof_type: i64,
         pieces_off: u8,
@@ -255,6 +258,7 @@ export namespace env {
     /// | Error               | Reason                   |
     /// |---------------------|--------------------------|
     /// | [`IllegalArgument`] | an argument is malformed |
+    @external("crypto", "verify_seal")
     export declare function verify_seal(info_off: u8, info_len: u32) :i32;
 
     /// Verifies a window proof of spacetime.
@@ -271,6 +275,7 @@ export namespace env {
     /// | Error               | Reason                   |
     /// |---------------------|--------------------------|
     /// | [`IllegalArgument`] | an argument is malformed |
+    @external("crypto", "verify_post")
     export declare function verify_post(info_off: u8, info_len: u32) :i32;
 
     /// Verifies that two block headers provide proof of a consensus fault.
@@ -292,6 +297,7 @@ export namespace env {
     /// |---------------------|---------------------------------------|
     /// | [`LimitExceeded`]   | exceeded lookback limit finding block |
     /// | [`IllegalArgument`] | an argument is malformed              |
+    @external("crypto", "verify_consensus_fault")
     export declare function verify_consensus_fault(
         h1_off: u8,
         h1_len: u32,
@@ -317,6 +323,7 @@ export namespace env {
     /// |---------------------|--------------------------------|
     /// | [`LimitExceeded`]   | exceeds seal aggregation limit |
     /// | [`IllegalArgument`] | an argument is malformed       |
+    @external("crypto", "verify_aggregate_seals")
     export declare function verify_aggregate_seals(agg_off: u8, agg_len: u32) :i32;
 
     /// Verifies a replica update proof.
@@ -334,6 +341,7 @@ export namespace env {
     /// |---------------------|-------------------------------|
     /// | [`LimitExceeded`]   | exceeds replica update limit  |
     /// | [`IllegalArgument`] | an argument is malformed      |
+    @external("crypto", "verify_replica_update")
     export declare function verify_replica_update(rep_off: u8, rep_len: u32) :i32;
 
     /// Verifies a batch of sector seal proofs.
@@ -352,6 +360,7 @@ export namespace env {
     /// | Error               | Reason                   |
     /// |---------------------|--------------------------|
     /// | [`IllegalArgument`] | an argument is malformed |
+    @external("crypto", "batch_verify_seals")
     export declare function batch_verify_seals(batch_off: u8, batch_len: u32, result_off: u8): void;
 
     // #############################################
@@ -363,9 +372,11 @@ export namespace env {
 
     /// Returns if we're in debug mode. A zero or positive return value means
     /// yes, a negative return value means no.
+    @external("debug", "enabled")
     export declare function enabled():i32;
 
     /// Logs a message on the node.
+    @external("debug", "log")
     export declare function log(message: u8, message_len: u32):void;
 
     // #############################################
@@ -392,6 +403,7 @@ export namespace env {
     /// |---------------------|---------------------------------------------|
     /// | [`NotFound`]        | the target block isn't in the reachable set |
     /// | [`IllegalArgument`] | there's something wrong with the CID        |
+    @external("ipld", "open")
     export declare function open(cid: u8) :IpldOpen;
 
     /// Creates a new block, returning the block's ID. The block's children must be in the reachable
@@ -411,6 +423,7 @@ export namespace env {
     /// | [`IllegalCodec`]    | the passed codec isn't supported                        |
     /// | [`Serialization`]   | the passed block doesn't match the passed codec         |
     /// | [`IllegalArgument`] | the block isn't in memory, etc.                         |
+    @external("ipld", "create")
     export declare function create(codec: u64, data: u8, len: u32) :u32;
 
     /// Reads the block identified by `id` into `obuf`, starting at `offset`, reading _at most_
@@ -434,6 +447,7 @@ export namespace env {
     /// |---------------------|---------------------------------------------------|
     /// | [`InvalidHandle`]   | if the handle isn't known.                        |
     /// | [`IllegalArgument`] | if the passed buffer isn't valid, in memory, etc. |
+    @external("ipld", "read")
     export declare function read(id: u32, offset: u32, obuf: u8, max_len: u32) :u32;
 
     /// Returns the codec and size of the specified block.
@@ -443,6 +457,7 @@ export namespace env {
     /// | Error             | Reason                     |
     /// |-------------------|----------------------------|
     /// | [`InvalidHandle`] | if the handle isn't known. |
+    @external("ipld", "stat")
     export declare function stat(id: u32):IpldStat;
 
     // TODO: CID versions?
@@ -469,6 +484,7 @@ export namespace env {
     /// | [`InvalidHandle`]   | if the handle isn't known.                        |
     /// | [`IllegalCid`]      | hash code and/or hash length aren't supported.    |
     /// | [`IllegalArgument`] | if the passed buffer isn't valid, in memory, etc. |
+    @external("ipld", "cid")
     export declare function cid(
         id: u32,
         hash_fun: u64,
@@ -500,6 +516,7 @@ export namespace env {
     /// |---------------------|-------------------------|
     /// | [`LimitExceeded`]   | lookback exceeds limit. |
     /// | [`IllegalArgument`] | invalid buffer, etc.    |
+    @external("rand", "get_chain_randomness")
     export declare function get_chain_randomness(
         tag: i64,
         epoch: i64,
@@ -523,6 +540,7 @@ export namespace env {
     /// |---------------------|-------------------------|
     /// | [`LimitExceeded`]   | lookback exceeds limit. |
     /// | [`IllegalArgument`] | invalid buffer, etc.    |
+    @external("rand", "get_beacon_randomness")
     export declare function get_beacon_randomness(
         tag: i64,
         epoch: i64,
@@ -565,6 +583,7 @@ export namespace env {
     /// | [`InvalidHandle`]     | parameters block not found.                          |
     /// | [`LimitExceeded`]     | recursion limit reached.                             |
     /// | [`IllegalArgument`]   | invalid recipient address buffer.                    |
+    @external("send", "send")
     export declare function send(
         recipient_off: u8,
         recipient_len: u32,
@@ -597,6 +616,7 @@ export namespace env {
     /// |----------------------|----------------------------------------------------|
     /// | [`IllegalOperation`] | actor hasn't set the root yet, or has been deleted |
     /// | [`IllegalArgument`]  | if the passed buffer isn't valid, in memory, etc.  |
+    @external("self", "root")
     export declare function root(cid:u8, cid_max_len: u32) :u32;
 
     /// Sets the root CID for the calling actor. The new root must be in the reachable set.
@@ -611,6 +631,7 @@ export namespace env {
     /// |----------------------|------------------------------------------------|
     /// | [`IllegalOperation`] | actor has been deleted                         |
     /// | [`NotFound`]         | specified root CID is not in the reachable set |
+    @external("self", "set_root")
     export declare function set_root(cid: u8):void;
 
     /// Gets the current balance for the calling actor.
@@ -618,6 +639,7 @@ export namespace env {
     /// # Errors
     ///
     /// None.
+    @external("self", "current_balance")
     export declare function current_balance() :TokenAmount;
 
     /// Destroys the calling actor, sending its current balance
@@ -635,6 +657,7 @@ export namespace env {
     /// | [`NotFound`]        | beneficiary isn't found                                        |
     /// | [`Forbidden`]       | beneficiary is not allowed (usually means beneficiary is self) |
     /// | [`IllegalArgument`] | if the passed address buffer isn't valid, in memory, etc.      |
+    @external("self", "self_destruct")
     export declare function self_destruct(addr_off: u8, addr_len: u32) : void;
 
     // #############################################
@@ -662,5 +685,5 @@ export namespace env {
     ///
     /// None. This function doesn't return.
     @external("vm", "abort")
-    export declare function abort(code: u32, message_off: u8, message_len: u32):u32;
+    export declare function abort(code: u32, message_off: isize, message_len: u32):isize;
 }
