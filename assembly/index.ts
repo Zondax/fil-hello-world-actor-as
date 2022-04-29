@@ -1,13 +1,11 @@
-import {caller, methodNumber} from "./sdk/message";
-import {usrUnhandledError, usrForbidden} from "./sdk/vm";
-import {NO_DATA_BLOCK_ID} from "./sdk/env/constants";
-import {ActorID} from "./sdk/env/types";
-
+import {caller, methodNumber} from "./sdk";
+import {usrForbidden, usrUnhandledMsg} from "./sdk";
+import {ActorID, NO_DATA_BLOCK_ID} from "./sdk";
 
 export function invoke(_: u32): u32 {
   const methodNum = methodNumber()
   if (methodNum == u64(1)) constructor()
-  else usrUnhandledError()
+  else usrUnhandledMsg()
 
   return NO_DATA_BLOCK_ID;
 }
