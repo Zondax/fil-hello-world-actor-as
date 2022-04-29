@@ -21,6 +21,10 @@
 
 - https://github.com/raulk/fil-hello-world-actor
 
+### Go example: Hello world
+
+- https://github.com/ipfs-force-community/go-fvm-sdk
+
 ---
 
 # Tests 
