@@ -25,6 +25,17 @@
 
 - https://github.com/ipfs-force-community/go-fvm-sdk
 
+### IPFS Docs
+- https://medium.com/coinmonks/ipld-hands-on-tutorial-in-golang-15fff6bfe39d
+- https://medium.com/hackernoon/understanding-ipfs-in-depth-1-5-a-beginner-to-advanced-guide-e937675a8c8a
+- https://medium.com/hackernoon/understanding-ipfs-in-depth-4-6-what-is-multiformats-cf25eef83966
+
+#### Related docs
+- https://proto.school/content-addressing
+- https://proto.school/merkle-dags
+- https://multiformats.io/multihash/
+
+
 ---
 
 # Tests 

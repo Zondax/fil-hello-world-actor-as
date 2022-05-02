@@ -1,4 +1,4 @@
-import {message} from "./env/sys/message";
+import {message} from "../env/sys/message";
 import {usrIllegalState} from "./errors";
 
 export function methodNumber(): u64{

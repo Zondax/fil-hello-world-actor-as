@@ -1,5 +1,5 @@
-import {USR_FORBIDDEN, USR_ILLEGAL_STATE, USR_UNHANDLED_MESSAGE} from "./env/errors";
-import {vm} from "./env/sys/vm"
+import {USR_FORBIDDEN, USR_ILLEGAL_STATE, USR_UNHANDLED_MESSAGE} from "../env/errors";
+import {vm} from "../env/sys/vm"
 
 export function usrUnhandledMsg(): isize{
     return genericAbort(USR_UNHANDLED_MESSAGE, "unrecognized method")
