@@ -1,7 +1,7 @@
 import {ipld} from "../env/sys/ipld"
 import {Codec, IpldStat, IpldOpen} from "../env";
 
-export function create(codec: u64, data: Array<u8> ): u32 {
+export function create(codec: u64, data: Uint8Array ): u32 {
     const respPtr = memory.data(sizeof<u32>())
     const dataPtr = changetype<usize>(data)
     const dataLen = data.length
@@ -12,7 +12,7 @@ export function create(codec: u64, data: Array<u8> ): u32 {
     return load<u32>(respPtr)
 }
 
-export function cid(id: u32, hash_fun: u64, hash_len: u32, cidBuf: Array<u8>): u32 {
+export function cid(id: u32, hash_fun: u64, hash_len: u32, cidBuf: Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
     const cidBufPtr = changetype<usize>(cidBuf)
     const cidBufLen = cidBuf.length
@@ -24,7 +24,7 @@ export function cid(id: u32, hash_fun: u64, hash_len: u32, cidBuf: Array<u8>): u
 }
 
 
-export function read(id: u32, offset: u32, buf:Array<u8>): u32 {
+export function read(id: u32, offset: u32, buf:Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
     const dataPtr = changetype<usize>(buf)
     const dataLen = buf.length
@@ -49,7 +49,7 @@ export function stat(id: u32): IpldStat {
     return resp
 }
 
-export function open(id: Array<u8>): IpldOpen {
+export function open(id: Uint8Array): IpldOpen {
     const respPtr = memory.data(sizeof<u32>() + sizeof<Codec>() + sizeof<u32>()) // Id + Codec + Size
     const dataPtr = changetype<usize>(id)
 

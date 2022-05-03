@@ -34,6 +34,7 @@
 - https://proto.school/content-addressing
 - https://proto.school/merkle-dags
 - https://multiformats.io/multihash/
+- https://github.com/multiformats/multicodec/blob/master/table.csv
 
 
 ---

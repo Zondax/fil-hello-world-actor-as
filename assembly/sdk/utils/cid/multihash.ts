@@ -1,6 +1,6 @@
 import {Cid} from "../../env";
 
-export function cast(buf: Array<u8>): Cid{
+export function cast(buf: Uint8Array): Cid{
     if(buf.length < 2){
         return new Cid("", [], 0)
     }
