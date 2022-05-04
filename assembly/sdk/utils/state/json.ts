@@ -5,7 +5,7 @@ import {Get, Put} from "../../helpers/ipld";
 import {Cid, DAG_JSON} from "../../env";
 import {setRoot} from "../../wrappers/self";
 
-class State {
+export class State {
     count:u64
 
     constructor(count: u64) {
