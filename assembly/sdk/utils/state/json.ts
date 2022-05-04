@@ -1,4 +1,4 @@
-import { JSONEncoder, JSON } from "assemblyscript-json";
+import { JSONEncoder, JSON } from "assemblyscript-json/assembly";
 
 import {root} from "../../helpers/self";
 import {Get, Put} from "../../helpers/ipld";

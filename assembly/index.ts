@@ -1,6 +1,7 @@
 import {caller, methodNumber} from "./sdk";
 import {usrForbidden, usrUnhandledMsg} from "./sdk";
 import {ActorID, NO_DATA_BLOCK_ID} from "./sdk";
+import {State} from "./sdk/utils/state/json";
 
 
 export function invoke(_: u32): u32 {
@@ -16,6 +17,9 @@ export function constructor(): void {
   const INIT_ACTOR_ADDR: ActorID = 1;
 
   if ( caller() != INIT_ACTOR_ADDR ) usrForbidden()
+
+  const state = new State(0)
+  state.save()
 
   return;
 }
