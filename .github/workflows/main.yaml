@@ -23,17 +23,24 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.13.0'
-      - name: Install yarn
+      - name: Install dependencies
         run: |
           npm install -g yarn
-      - run: yarn install
-      - run: yarn asbuild
-        name: Install Hello Actor in Lotus
-      - run: |
+          yarn install
+      - name: Build WASM file
+        run: yarn asbuild
+      - name: Install Hello Actor in Lotus
+        run: |
           ~/lotus/lotus version
           ~/lotus/lotus chain install-actor build/debug.wasm >> output.txt
           cat output.txt
-      - run: |
+      - name: Create Hello Actor in Lotus
+        run: |
           cid=$(sed -n 's/^Actor Code CID: //p' output.txt)
           echo $cid
-          ~/lotus/lotus chain create-actor $cid
+          ~/lotus/lotus chain create-actor $cid >> output.txt
+          cat output.txt
+      - name: Get sattus actor
+        run: |
+          address=$(sed -n 's/^ID Address: //p' output.txt)
+          ~/lotus/lotus state get-actor $address
