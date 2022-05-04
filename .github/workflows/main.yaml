@@ -28,6 +28,12 @@ jobs:
           npm install -g yarn
       - run: yarn install
       - run: yarn asbuild
-      - run: ~/lotus/lotus version
-      - run: ~/lotus/lotus chain install-actor build/debug.wasm >> output.txt
-      - run: cat output.txt
+        name: Install Hello Actor in Lotus
+      - run: |
+        ~/lotus/lotus version
+        ~/lotus/lotus chain install-actor build/debug.wasm >> output.txt
+        cat output.txt
+      - run: |
+        cid=$(sed -n 's/^Actor Code CID: //p' output.txt)
+        echo $cid
+        ~/lotus/lotus chain create-actor $cid
