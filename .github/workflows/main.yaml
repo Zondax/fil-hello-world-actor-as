@@ -40,7 +40,7 @@ jobs:
           echo $cid
           ~/lotus/lotus chain create-actor $cid >> output.txt
           cat output.txt
-      - name: Get sattus actor
+      - name: Get status actor
         run: |
           address=$(sed -n 's/^ID Address: //p' output.txt)
           ~/lotus/lotus state get-actor $address
