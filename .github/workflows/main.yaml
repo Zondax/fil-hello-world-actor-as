@@ -29,4 +29,5 @@ jobs:
       - run: yarn install
       - run: yarn asbuild
       - run: ~/lotus/lotus version
-      - run: ~/lotus/lotus chain install-actor build/debug.wasm
+      - run: ~/lotus/lotus chain install-actor build/debug.wasm >> output.txt
+      - run: cat output.txt
