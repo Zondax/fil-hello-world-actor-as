@@ -2,26 +2,29 @@ import { JSONEncoder, JSON } from "assemblyscript-json/assembly";
 
 import {root} from "../../helpers/self";
 import {Get, Put} from "../../helpers/ipld";
-import {Cid, DAG_JSON} from "../../env";
+import {Cid, DAG_CBOR} from "../../env";
 import {setRoot} from "../../wrappers/self";
 
 export class State {
-    count:u64
+    count:u32
 
-    constructor(count: u64) {
+    constructor(count: u32) {
         this.count = count;
     }
 
     save(): Cid{
-        const encoder = new JSONEncoder();
-        encoder.setInteger("int", this.count);
-
-        const jsonBytes: Uint8Array = encoder.serialize();
-        const stCid = Put(0xb220, 32, DAG_JSON, jsonBytes)
+        const cborBytes: Uint8Array = new Uint8Array(2); // [129, 0]
+        cborBytes[0] = 129;
+        cborBytes[1] = 1; 
+        const stCid = Put(0xb220, 32, DAG_CBOR, cborBytes)
 
         setRoot(stCid)
 
         return stCid
+    }
+
+    static load(): State{
+        return new State(u32(0))
     }
 }
 
@@ -29,12 +32,11 @@ export function readState(): State{
     const rootCid = root()
     const data = Get(rootCid)
 
-    let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(data.toString()));
-    let countOrNull: JSON.Integer | null = jsonObj.getInteger("count")
+    let countOrNull: u64 = 1;
 
     if( countOrNull !== null ){
-        return new State(u64(countOrNull))
+        return new State(u32(countOrNull))
     } else {
-        return new State(u64(0))
+        return new State(u32(0))
     }
 }
