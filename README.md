@@ -56,3 +56,11 @@ kubectl exec -it -n filecoin-node filecoin-node-devnet-experimental-fvm-584784c8
 lotus chain install-actor /tmp/fil-actor-hello-world-as.wasm
 lotus chain create-actor <actor-id-from-previous-step>
 ```
+
+### To test it with the rust VM
+
+Be sure to have `Cargo` installed.
+```
+cd testing
+cargo r
+```
