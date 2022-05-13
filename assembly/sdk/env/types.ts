@@ -19,3 +19,4 @@ export class IpldStat {
 export class Cid {
     constructor(public value: string, public raw: Uint8Array, public len: u32) {}
 }
+

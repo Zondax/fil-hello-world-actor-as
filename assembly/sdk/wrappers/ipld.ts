@@ -1,5 +1,6 @@
 import {ipld} from "../env/sys/ipld"
 import {Codec, IpldStat, IpldOpen} from "../env";
+import {cidError, genericAbort} from "./errors";
 
 export function create(codec: u64, data: Uint8Array ): u32 {
     const respPtr = memory.data(sizeof<u32>())
@@ -7,7 +8,11 @@ export function create(codec: u64, data: Uint8Array ): u32 {
     const dataLen = data.length
 
     // TODO Check if ipld.create func ran successfully
-    ipld.create(respPtr, codec, dataPtr, dataLen)
+    const code = ipld.create(respPtr, codec, dataPtr, dataLen)
+
+    if (code != 0) {
+        //genericAbort(changetype<u32>(code), "Unable to create CID")
+    }
 
     return load<u32>(respPtr)
 }
