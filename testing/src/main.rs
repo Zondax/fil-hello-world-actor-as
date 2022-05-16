@@ -41,26 +41,27 @@ fn main() {
     let mut tester = Tester::new(
         NetworkVersion::V15,
         StateTreeVersion::V4,
-        MemoryBlockstore::default(),
+        //MemoryBlockstore::default(),
     )
     .unwrap();
 
     let sender: [Account; 1] = tester.create_accounts().unwrap();
 
-    /*let wasm_path = env::current_dir()
+    let wasm_path = env::current_dir()
     .unwrap()
     .join(WASM_COMPILED_PATH)
     .canonicalize()
     .unwrap();
-    let wasm_bin = std::fs::read(wasm_path).expect("Unable to read file");*/
+    let wasm_bin = std::fs::read(wasm_path).expect("Unable to read file");
 
-    let wasm_bin = wat2wasm(WAT).unwrap();
+    //let wasm_bin = wat2wasm(WAT).unwrap();
 
     let actor_state = State::default();
     let state_cid = tester.set_state(&actor_state).unwrap();
 
     // Set actor
     let actor_address = Address::new_id(10000);
+
 
     tester
         .set_actor_from_bin(&wasm_bin, state_cid, actor_address, BigInt::default())
