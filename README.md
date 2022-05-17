@@ -47,12 +47,12 @@ Build and connect to pod:
 ```
 yarn asbuild
 kubectl config use-context sandbox
-kubectl -n filecoin-node cp build/release.wasm filecoin-node-devnet-experimental-fvm-584784c8f5-hq9xz:/tmp/fil-actor-hello-world-as.wasm
+kubectl -n filecoin-node cp build/release.wasm filecoin-node-devnet-experimental-fvm-76f49b46cc-xthst:/tmp/fil-actor-hello-world-as.wasm
 ```
 
 To install and execute the actor:
 ```
-kubectl exec -it -n filecoin-node filecoin-node-devnet-experimental-fvm-584784c8f5-hq9xz -- bash
+kubectl exec -it -n filecoin-node filecoin-node-devnet-experimental-fvm-76f49b46cc-xthst -- bash
 lotus chain install-actor /tmp/fil-actor-hello-world-as.wasm
 lotus chain create-actor <actor-id-from-previous-step>
 ```

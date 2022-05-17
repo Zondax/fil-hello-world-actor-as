@@ -1,6 +1,5 @@
 import {ipld} from "../env/sys/ipld"
 import {Codec, IpldStat, IpldOpen} from "../env";
-import {cidError, genericAbort} from "./errors";
 
 export function create(codec: u64, data: Uint8Array ): u32 {
     const respPtr = memory.data(sizeof<u32>())
