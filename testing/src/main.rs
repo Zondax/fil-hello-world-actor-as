@@ -6,13 +6,14 @@ use fvm_ipld_encoding::tuple::*;
 use fvm_shared::address::Address;
 use fvm_shared::bigint::BigInt;
 use wabt::wat2wasm;
+use std::fs::File;
+use std::io::prelude::*;
 use std::env;
 
 const WASM_COMPILED_PATH: &str =
-    "../build/debug.wasm";
+    "../build/release.wasm";
 
 const WAT: &str = r#"
-;; Mock invoke function
 (module
     (type $i32_=>_i32 (func (param i32) (result i32)))
     (type $none_=>_none (func))
@@ -26,7 +27,7 @@ const WAT: &str = r#"
     (func $assembly/index/constructor
      nop
     )
-   )
+   ) 
 "#;
 
 /// The state object.
@@ -55,6 +56,9 @@ fn main() {
     let wasm_bin = std::fs::read(wasm_path).expect("Unable to read file");
 
     //let wasm_bin = wat2wasm(WAT).unwrap();
+
+    let mut file = File::create("foo.wasm").unwrap();
+    file.write_all(&wasm_bin).unwrap();
 
     let actor_state = State::default();
     let state_cid = tester.set_state(&actor_state).unwrap();

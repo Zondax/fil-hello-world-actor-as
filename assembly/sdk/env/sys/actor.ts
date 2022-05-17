@@ -60,4 +60,8 @@ export namespace actor {
     /// **Privledged:** May only be called by the init actor.
     @external("actors", "create_actor")
     export declare function create_actor(actor_id: u64, typ_off: isize): isize;
+
+    /// Installs/Ensures actor code is valid and loaded.
+    @external("actors", "install_actor")
+    export declare function install_actor(cid_off: isize): isize;
 }
