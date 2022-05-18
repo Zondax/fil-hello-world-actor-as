@@ -28,7 +28,7 @@ function constructor(): void {
   if ( caller() != INIT_ACTOR_ADDR ) usrForbidden()
 
   //saveState(0)
-  const cborBytes = new ArrayBuffer(2);
+  const cborBytes = new Uint8Array(2);
 
   return;
 }
