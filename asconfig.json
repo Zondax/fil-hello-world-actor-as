@@ -3,7 +3,8 @@
     "debug": {
       "outFile": "build/debug.wasm",
       "textFile": "build/debug.wat",
-      "debug": true
+      "debug": true,
+      "disable": "bulk-memory"
     },
     "release": {
       "outFile": "build/release.wasm",
@@ -11,7 +12,8 @@
       "optimizeLevel": 3,
       "shrinkLevel": 0,
       "converge": false,
-      "noAssert": false
+      "noAssert": false,
+      "disable": "bulk-memory"
     }
   },
   "options": {

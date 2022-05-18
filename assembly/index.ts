@@ -12,7 +12,7 @@ export function invoke(_: u32): u32 {
       constructor()
       break
     case 2:
-      let ret: Uint8Array
+      say_hello()
       break
     default:
       usrUnhandledMsg()
@@ -27,13 +27,13 @@ export function constructor(): void {
 
   if ( caller() != INIT_ACTOR_ADDR ) usrForbidden()
 
-  //const state = new State(0)
-  //state.save()
+  const state = new State(0)
+  state.save()
 
   return;
 }
 
-/*function say_hello(): Uint8Array {
+function say_hello(): Uint8Array {
   const state = State.load();
   state.count += 1;
   state.save();
@@ -43,4 +43,4 @@ export function constructor(): void {
   ret[1] = 65;
 
   return ret;
-}*/
+}

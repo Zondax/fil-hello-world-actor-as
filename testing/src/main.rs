@@ -55,10 +55,10 @@ fn main() {
     .unwrap();
     let wasm_bin = std::fs::read(wasm_path).expect("Unable to read file");
 
-    //let wasm_bin = wat2wasm(WAT).unwrap();
+    /*let wasm_bin = wat2wasm(WAT).unwrap();
 
     let mut file = File::create("foo.wasm").unwrap();
-    file.write_all(&wasm_bin).unwrap();
+    file.write_all(&wasm_bin).unwrap();*/
 
     let actor_state = State::default();
     let state_cid = tester.set_state(&actor_state).unwrap();
