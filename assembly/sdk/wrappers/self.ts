@@ -1,8 +1,8 @@
 import {Cid} from "../env";
 import {self} from "../env/sys/self";
 
-export function setRoot(id: Cid): void {
-    const dataPtr = changetype<usize>(id.raw)
+export function setRoot(id: Uint8Array): void {
+    const dataPtr = changetype<usize>(id)
 
     // TODO Check if ipld.create func ran successfully
     self.set_root(dataPtr)
