@@ -10,7 +10,7 @@ export class State {
         this.count = count;
     }
 
-    /*save(): Cid{
+    save(): Cid{
         const cborBytes: Uint8Array = new Uint8Array(2); // [129, 0]
         cborBytes[0] = 129;
         cborBytes[1] = 1; 
@@ -23,7 +23,7 @@ export class State {
 
     static load(): State{
         return new State(u32(0))
-    }*/
+    }
 }
 
 export function saveState(count: u32): void {

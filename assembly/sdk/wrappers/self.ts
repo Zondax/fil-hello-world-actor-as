@@ -1,11 +1,17 @@
-import {Cid} from "../env";
-import {self} from "../env/sys/self";
+import {Cid} from "../env"
+import {self} from "../env/sys/self"
+import {USR_UNSPECIFIED} from "../env/errors"
+import {genericAbort} from "./errors"
 
-export function setRoot(id: Uint8Array): void {
-    const dataPtr = changetype<usize>(id)
+export function setRoot(id: Cid): void {
+    const dataPtr = changetype<usize>(id.raw)
 
     // TODO Check if ipld.create func ran successfully
-    self.set_root(dataPtr)
+    const code = self.set_root(dataPtr)
+
+    if (code != 0) {
+        genericAbort(USR_UNSPECIFIED)
+    }
 }
 
 

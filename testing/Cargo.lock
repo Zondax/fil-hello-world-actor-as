@@ -3834,6 +3834,7 @@ dependencies = [
 name = "testing"
 version = "0.1.0"
 dependencies = [
+ "fvm",
  "fvm_integration_tests",
  "fvm_ipld_blockstore 0.1.0 (git+https://github.com/filecoin-project/ref-fvm?branch=experimental/fvm-m2)",
  "fvm_ipld_encoding 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",

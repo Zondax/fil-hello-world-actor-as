@@ -1,7 +1,7 @@
 import {caller, methodNumber} from "./sdk";
 import {usrForbidden, usrUnhandledMsg} from "./sdk";
 import {ActorID, NO_DATA_BLOCK_ID} from "./sdk";
-import {saveState} from "./sdk/utils/state/json";
+import {State} from "./sdk/utils/state/json";
 
 
 export function invoke(_: u32): u32 {
@@ -12,7 +12,7 @@ export function invoke(_: u32): u32 {
       constructor()
       break
     case 2:
-      //say_hello()
+      say_hello()
       break
     default:
       usrUnhandledMsg()
@@ -23,18 +23,18 @@ export function invoke(_: u32): u32 {
 
 function constructor(): void {
   // This constant should be part of the SDK.
-  const INIT_ACTOR_ADDR: ActorID = 1;
+  const INIT_ACTOR_ADDR: ActorID = 100;
 
   if ( caller() != INIT_ACTOR_ADDR ) usrForbidden()
 
-  //saveState(0)
-  const cborBytes = new Uint8Array(2);
+  const state = new State(0)
+  state.save()
 
   return;
 }
 
 // Not working
-/*function say_hello(): Uint8Array {
+function say_hello(): Uint8Array {
   const state = State.load();
   state.count += 1;
   state.save();
@@ -44,4 +44,4 @@ function constructor(): void {
   ret[1] = 65;
 
   return ret;
-}*/
+}

@@ -1,7 +1,10 @@
 use fvm_integration_tests::tester::{Account, Tester};
+use fvm_shared::message::Message;
 use fvm_shared::state::StateTreeVersion;
 use fvm_shared::version::NetworkVersion;
-use fvm_ipld_blockstore::MemoryBlockstore;
+use fvm::executor::{ApplyKind, Executor};
+//use fvm_ipld_blockstore::MemoryBlockstore;
+use fvm_ipld_blockstore::Blockstore;
 use fvm_ipld_encoding::tuple::*;
 use fvm_shared::address::Address;
 use fvm_shared::bigint::BigInt;
@@ -48,6 +51,8 @@ fn main() {
 
     let sender: [Account; 1] = tester.create_accounts().unwrap();
 
+    //dbg!(sender);
+
     let wasm_path = env::current_dir()
     .unwrap()
     .join(WASM_COMPILED_PATH)
@@ -60,12 +65,11 @@ fn main() {
     let mut file = File::create("foo.wasm").unwrap();
     file.write_all(&wasm_bin).unwrap();*/
 
-    let actor_state = State::default();
+    let actor_state = State { count: 0 };
     let state_cid = tester.set_state(&actor_state).unwrap();
 
     // Set actor
     let actor_address = Address::new_id(10000);
-
 
     tester
         .set_actor_from_bin(&wasm_bin, state_cid, actor_address, BigInt::default())
@@ -73,4 +77,34 @@ fn main() {
     
     // Instantiate machine
     tester.instantiate_machine().unwrap();
+
+    let actor_state = tester.state_tree.get_actor(&actor_address).unwrap().unwrap();
+    dbg!(&actor_state);
+
+    let state = tester.blockstore().get(&actor_state.state).unwrap();
+    dbg!(state);
+
+    let message = Message {
+        from: sender[0].1,
+        to: actor_address,
+        gas_limit: 1000000000,
+        method_num: 2,
+        ..Message::default()
+    };
+
+    let res = tester
+    .executor
+    .unwrap()
+    .execute_message(message, ApplyKind::Explicit, 100)
+    .unwrap();
+
+    dbg!(&res);
+
+    assert_eq!(res.msg_receipt.exit_code.value(), 0);
+
+    let actor_state_bis = tester.state_tree.get_actor(&actor_address).unwrap().unwrap();
+    dbg!(&actor_state_bis);
+
+    let state_bis = tester.state_tree.store().get(&actor_state_bis.state).unwrap();
+    dbg!(state_bis);
 }

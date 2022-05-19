@@ -5,7 +5,7 @@ import {cid, create, open, read} from "../wrappers";
 import {Cid, MAX_CID_LEN} from "../env";
 import {cast} from "../utils/cid/multihash";
 
-export function Put(mh_code: u64, mh_size: u32, codec: u64, data: Uint8Array): Uint8Array {
+export function Put(mh_code: u64, mh_size: u32, codec: u64, data: Uint8Array): Cid {
     const id = create(codec, data)
 
     // I really hate this CID interface. Why can't I just have bytes?
