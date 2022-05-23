@@ -15,7 +15,8 @@
       "converge": false,
       "noAssert": false,
       "disable": "bulk-memory",
-      "runtime": "stub"
+      "runtime": "stub",
+      "stats": true
     }
   },
   "options": {

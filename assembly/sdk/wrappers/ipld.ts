@@ -1,18 +1,15 @@
 import {ipld} from "../env/sys/ipld"
 import {Codec, IpldStat, IpldOpen} from "../env"
-import {USR_UNSPECIFIED} from "../env/errors"
 import {genericAbort} from "./errors"
 
 export function create(codec: u64, data: Uint8Array ): u32 {
     const respPtr = memory.data(sizeof<u32>())
-    const dataPtr = changetype<usize>(data)
+    const dataPtr = changetype<usize>(data.dataStart)
     const dataLen = data.length
 
-    // TODO Check if ipld.create func ran successfully
     const code = ipld.create(respPtr, codec, dataPtr, dataLen)
-
     if (code != 0) {
-        genericAbort(USR_UNSPECIFIED)
+        genericAbort(changetype<u32>(code))
     }
 
     return load<u32>(respPtr)
@@ -20,13 +17,12 @@ export function create(codec: u64, data: Uint8Array ): u32 {
 
 export function cid(id: u32, hash_fun: u64, hash_len: u32, cidBuf: Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
-    const cidBufPtr = changetype<usize>(cidBuf)
+    const cidBufPtr = changetype<usize>(cidBuf.dataStart)
     const cidBufLen = cidBuf.length
 
-    // TODO Check if ipld.create func ran successfully
     const code = ipld.cid(respPtr, id, hash_fun, hash_len, cidBufPtr, cidBufLen)
     if (code != 0) {
-        genericAbort(USR_UNSPECIFIED)
+        genericAbort(changetype<u32>(code))
     }
 
     return load<u32>(respPtr)
@@ -35,11 +31,13 @@ export function cid(id: u32, hash_fun: u64, hash_len: u32, cidBuf: Uint8Array): 
 
 export function read(id: u32, offset: u32, buf:Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
-    const dataPtr = changetype<usize>(buf)
+    const dataPtr = changetype<usize>(buf.dataStart)
     const dataLen = buf.length
 
-    // TODO Check if ipld.create func ran successfully
-    ipld.read(respPtr, id, offset, dataPtr, dataLen)
+    const code = ipld.read(respPtr, id, offset, dataPtr, dataLen)
+    if (code != 0) {
+        genericAbort(changetype<u32>(code))
+    }
 
     return load<u32>(respPtr)
 }
@@ -47,8 +45,10 @@ export function read(id: u32, offset: u32, buf:Uint8Array): u32 {
 export function stat(id: u32): IpldStat {
     const respPtr = memory.data(sizeof<Codec>() + sizeof<u32>()) // Codec + Size
 
-    // TODO Check if ipld.create func ran successfully
-    ipld.stat(respPtr, id)
+    const code = ipld.stat(respPtr, id)
+    if (code != 0) {
+        genericAbort(changetype<u32>(code))
+    }
 
     const resp: IpldStat = {
         Codec: load<u64>(respPtr),
@@ -60,10 +60,12 @@ export function stat(id: u32): IpldStat {
 
 export function open(id: Uint8Array): IpldOpen {
     const respPtr = memory.data(sizeof<u32>() + sizeof<Codec>() + sizeof<u32>()) // Id + Codec + Size
-    const dataPtr = changetype<usize>(id)
+    const dataPtr = changetype<usize>(id.dataStart)
 
-    // TODO Check if ipld.create func ran successfully
-    ipld.open(respPtr, dataPtr)
+    const code = ipld.open(respPtr, dataPtr)
+    if (code != 0) {
+        genericAbort(changetype<u32>(code))
+    }
 
     return {
         Id: load<u32>(respPtr),

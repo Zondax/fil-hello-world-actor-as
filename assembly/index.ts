@@ -23,7 +23,7 @@ export function invoke(_: u32): u32 {
 
 function constructor(): void {
   // This constant should be part of the SDK.
-  const INIT_ACTOR_ADDR: ActorID = 100;
+  const INIT_ACTOR_ADDR: ActorID = 1;
 
   if ( caller() != INIT_ACTOR_ADDR ) usrForbidden()
 

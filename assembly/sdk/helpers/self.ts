@@ -6,5 +6,5 @@ export function root(): Cid{
     const cidBuf = new Uint8Array(MAX_CID_LEN)
     const cidBufLen = selfRoot(cidBuf)
 
-    return cast(cidBuf)
+    return cast(cidBuf, cidBufLen)
 }

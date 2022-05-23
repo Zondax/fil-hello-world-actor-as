@@ -23,7 +23,7 @@ export namespace ipld{
     /// | [`NotFound`]        | the target block isn't in the reachable set |
     /// | [`IllegalArgument`] | there's something wrong with the CID        |
     @external("ipld", "open")
-    export declare function open(resp_ptr: isize, cid: isize) :isize;
+    export declare function open(resp_ptr: isize, cid: isize) :usize;
 
     /// Creates a new block, returning the block's ID. The block's children must be in the reachable
     /// set. The new block isn't added to the reachable set until the CID is computed.
@@ -43,7 +43,7 @@ export namespace ipld{
     /// | [`Serialization`]   | the passed block doesn't match the passed codec         |
     /// | [`IllegalArgument`] | the block isn't in memory, etc.                         |
     @external("ipld", "create")
-    export declare function create(resp_ptr:isize, codec: u64, data: isize, len: u32) :isize;
+    export declare function create(resp_ptr:isize, codec: u64, data: isize, len: u32) :usize;
 
     /// Reads the block identified by `id` into `obuf`, starting at `offset`, reading _at most_
     /// `max_len` bytes.
@@ -67,7 +67,7 @@ export namespace ipld{
     /// | [`InvalidHandle`]   | if the handle isn't known.                        |
     /// | [`IllegalArgument`] | if the passed buffer isn't valid, in memory, etc. |
     @external("ipld", "read")
-    export declare function read(resp_ptr: isize, id: u32, offset: u32, obuf: isize, max_len: u32) :isize;
+    export declare function read(resp_ptr: isize, id: u32, offset: u32, obuf: isize, max_len: u32) :usize;
 
     /// Returns the codec and size of the specified block.
     ///
@@ -77,7 +77,7 @@ export namespace ipld{
     /// |-------------------|----------------------------|
     /// | [`InvalidHandle`] | if the handle isn't known. |
     @external("ipld", "stat")
-    export declare function stat(resp_ptr: isize, id: u32):isize;
+    export declare function stat(resp_ptr: isize, id: u32):usize;
 
     // TODO: CID versions?
 
@@ -111,5 +111,5 @@ export namespace ipld{
         hash_len: u32,
         cid: isize,
         cid_max_len: u32,
-    ) :isize;
+    ) :usize;
 }

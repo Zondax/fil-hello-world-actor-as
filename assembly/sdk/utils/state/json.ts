@@ -26,17 +26,6 @@ export class State {
     }
 }
 
-export function saveState(count: u32): void {
-    const cborBytes: Uint8Array = new Uint8Array(2); // [129, 0]
-    cborBytes[0] = 129;
-    cborBytes[1] = 1; 
-    const stCid = Put(0xb220, 32, DAG_CBOR, cborBytes)
-
-    setRoot(stCid)
-
-    return
-}
-
 /*export function readState(): State{
     const rootCid = root()
     const data = Get(rootCid)

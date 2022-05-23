@@ -12,9 +12,14 @@ use wabt::wat2wasm;
 use std::fs::File;
 use std::io::prelude::*;
 use std::env;
+use std::str::FromStr;
 
 const WASM_COMPILED_PATH: &str =
     "../build/release.wasm";
+
+/*const WASM_COMPILED_PATH: &str =
+    "../fil_hello_world_actor.compact.wasm";*/
+
 
 const WAT: &str = r#"
 (module
@@ -51,7 +56,7 @@ fn main() {
 
     let sender: [Account; 1] = tester.create_accounts().unwrap();
 
-    //dbg!(sender);
+    dbg!(sender[0].1.to_string());
 
     let wasm_path = env::current_dir()
     .unwrap()
@@ -78,12 +83,37 @@ fn main() {
     // Instantiate machine
     tester.instantiate_machine().unwrap();
 
-    let actor_state = tester.state_tree.get_actor(&actor_address).unwrap().unwrap();
-    dbg!(&actor_state);
+    dbg!(&tester.code_cids);
+    dbg!(&tester.builtin_actors);
+    dbg!(&tester.accounts_code_cid);
 
-    let state = tester.blockstore().get(&actor_state.state).unwrap();
+    let actor_state = tester.state_tree.get_actor(&actor_address).unwrap().unwrap();
+    dbg!(&actor_state.state.to_string());
+
+    let state = tester.blockstore().clone().get(&actor_state.state).unwrap();
+    
     dbg!(state);
 
+    println!("Calling create actor");
+    let message = Message {
+        from: sender[0].1,
+        to: Address::from_str("t01").unwrap(),
+        gas_limit: 1000000000,
+        method_num: 2,
+        ..Message::default()
+    };
+
+    let mut res = tester
+    .executor
+    .unwrap()
+    .execute_message(message, ApplyKind::Explicit, 100)
+    .unwrap();
+
+    dbg!(&res);
+
+    assert_eq!(res.msg_receipt.exit_code.value(), 0);
+
+    /*println!("Calling `say_hello()`. This should update state.");
     let message = Message {
         from: sender[0].1,
         to: actor_address,
@@ -92,7 +122,7 @@ fn main() {
         ..Message::default()
     };
 
-    let res = tester
+    res = tester
     .executor
     .unwrap()
     .execute_message(message, ApplyKind::Explicit, 100)
@@ -103,8 +133,8 @@ fn main() {
     assert_eq!(res.msg_receipt.exit_code.value(), 0);
 
     let actor_state_bis = tester.state_tree.get_actor(&actor_address).unwrap().unwrap();
-    dbg!(&actor_state_bis);
+    dbg!(&actor_state_bis.state.to_string());
 
     let state_bis = tester.state_tree.store().get(&actor_state_bis.state).unwrap();
-    dbg!(state_bis);
+    dbg!(&state_bis);*/
 }
