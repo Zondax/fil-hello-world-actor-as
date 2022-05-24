@@ -5,7 +5,8 @@
       "textFile": "build/debug.wat",
       "debug": true,
       "disable": "bulk-memory",
-      "runtime": "stub"
+      "runtime": "stub",
+      "maximumMemory": 4096
     },
     "release": {
       "outFile": "build/release.wasm",

@@ -20,6 +20,11 @@ binaryen@106.0.0-nightly.20220320:
   resolved "https://registry.yarnpkg.com/binaryen/-/binaryen-106.0.0-nightly.20220320.tgz#ee74538fae5fdcef8b5eba1ae0cd62dcead6aa5d"
   integrity sha512-9Jzp9aOJ2uk2+viAiPr6+wi1BZKlxO4paTVm481RUEq3PIY63kdw78JoThrROt1s1qpCMuz0Oml6YqPJ7tep4w==
 
+fvm-as-sdk@../fvm-as-sdk:
+  version "0.1.0"
+  dependencies:
+    assemblyscript-json "^1.1.0"
+
 long@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/long/-/long-5.2.0.tgz#2696dadf4b4da2ce3f6f6b89186085d94d52fd61"

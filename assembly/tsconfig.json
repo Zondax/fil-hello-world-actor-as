@@ -1,5 +1,5 @@
 {
-  "extends": "assemblyscript/std/assembly.json",
+  "extends": "fvm-as-sdk/assembly/tsconfig.json",
   "include": [
     "./**/*.ts"
   ]
