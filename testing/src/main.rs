@@ -4,8 +4,10 @@ use fvm_shared::state::StateTreeVersion;
 use fvm_shared::version::NetworkVersion;
 use fvm::executor::{ApplyKind, Executor};
 use fvm_ipld_blockstore::MemoryBlockstore;
+use fvm::{init_actor};
 use fvm_ipld_blockstore::Blockstore;
 use fvm_ipld_encoding::tuple::*;
+use fvm_ipld_encoding::RawBytes;
 use fvm_shared::address::Address;
 use fvm_shared::bigint::BigInt;
 use std::env;
@@ -24,7 +26,7 @@ fn main() {
     println!("Testing Hello World contract in assembly script");
 
     let mut tester = Tester::new(
-        NetworkVersion::V15,
+        NetworkVersion::V16,
         StateTreeVersion::V4,
         MemoryBlockstore::default(),
     )
@@ -50,21 +52,29 @@ fn main() {
     tester
         .set_actor_from_bin(&wasm_bin, state_cid, actor_address, BigInt::default())
         .unwrap();
-    
+
+    let actor = tester.state_tree.as_ref().unwrap().get_actor(&actor_address).unwrap().unwrap();
+    dbg!(&actor.state.to_string());
+    /*let state = tester.blockstore().clone().get(&actor_state.state).unwrap();
+    dbg!(state);*/
+
     // Instantiate machine
     tester.instantiate_machine().unwrap();
 
-    /*let actor_state = tester.state_tree.get_actor(&actor_address).unwrap().unwrap();
-    dbg!(&actor_state.state.to_string());
-    let state = tester.blockstore().clone().get(&actor_state.state).unwrap();
-    dbg!(state);*/
+    /*let params = fil_actor_init::ExecParams {
+        code_cid: actor.code,
+        constructor_params: RawBytes::new(vec![])
+    };
+
+    dbg!(hex::encode(&*RawBytes::serialize(params).unwrap()));*/
 
     println!("Calling `say_hello()`. This should update state.");
     let message = Message {
         from: sender[0].1,
-        to: actor_address,
+        to: init_actor::INIT_ACTOR_ADDR,
         gas_limit: 1000000000,
-        method_num: 1,
+        method_num: 2,
+        params: RawBytes::new(hex::decode("82d82a5827000155a0e4022051b3ffb118f0d960b936e744c665f266d3c110a40c9426665f6563da62642bb540").unwrap()),
         ..Message::default()
     };
 

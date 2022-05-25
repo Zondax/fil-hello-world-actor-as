@@ -9,13 +9,15 @@ edition = "2021"
 fvm_ipld_blockstore = { version = "0.1.1", path = "../../ref-fvm/ipld/blockstore" }
 fvm_integration_tests = { version = "0.1.0", path = "../../ref-fvm/testing/integration" }
 fvm_shared = { version = "0.7.0", path = "../../ref-fvm/shared" }
-fvm = { version = "1.0.0-rc.1", path = "../../ref-fvm/fvm", default-features = false }
+fvm = { version = "1.0.0-rc.1", path = "../../ref-fvm/fvm" }
+#fil_actor_init = "7.5.0"
 #fvm_ipld_blockstore = { version = "0.1.0", git = "https://github.com/filecoin-project/ref-fvm", branch = "experimental/fvm-m2" }
 #fvm_integration_tests = { version = "0.1.0", git = "https://github.com/filecoin-project/ref-fvm", branch = "experimental/fvm-m2" }
 #fvm_shared = { version = "0.6.1", git = "https://github.com/filecoin-project/ref-fvm", branch = "experimental/fvm-m2" }
 #fvm = { version = "0.7.1", git = "https://github.com/filecoin-project/ref-fvm", branch = "experimental/fvm-m2", default-features = false }
-fvm_ipld_encoding = "0.2.0"
+fvm_ipld_encoding = { version = "0.2", path = "../../ref-fvm/ipld/encoding" }
 
 serde = { version = "1.0", features = ["derive"] }
 serde_tuple = "0.5"
 wabt = "0.10.0"
+hex = "0.4.3"
