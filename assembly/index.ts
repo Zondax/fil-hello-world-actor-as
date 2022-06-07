@@ -1,5 +1,5 @@
-import {caller, methodNumber, usrUnhandledMsg, usrForbidden} from "@zondax/fvm-as-sdk/assembly/wrappers";
-import {NO_DATA_BLOCK_ID, ActorID} from "@zondax/fvm-as-sdk/assembly/env";
+import {caller, methodNumber, usrUnhandledMsg, usrForbidden, create} from "@zondax/fvm-as-sdk/assembly/wrappers";
+import {NO_DATA_BLOCK_ID, ActorID, DAG_CBOR} from "@zondax/fvm-as-sdk/assembly/env";
 import {State} from "./state";
 
 export function invoke(_: u32): u32 {
@@ -10,8 +10,10 @@ export function invoke(_: u32): u32 {
       constructor()
       break
     case 2:
-      say_hello()
-      break
+      const msg = say_hello()
+      const msgBuff = String.UTF8.encode(msg)
+      const buff = Uint8Array.wrap(msgBuff)
+      return create(DAG_CBOR, buff)
     default:
       usrUnhandledMsg()
   }
@@ -31,15 +33,11 @@ function constructor(): void {
   return;
 }
 
-// Not working
-function say_hello(): void {
+function say_hello(): string {
   const state = State.load();
   state.count += 1;
   state.save();
-/*
-  const ret = new Uint8Array(2); // "A"
-  ret[0] = 97;
-  ret[1] = 65;
 
-  return ret;*/
+  const message = "Hello world " + state.count.toString()
+  return message
 }
