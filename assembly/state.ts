@@ -23,7 +23,7 @@ export class State {
 
     static load(): State{
         const cidBuf = new Uint8Array(MAX_CID_LEN)
-        const cidBufLen = selfRoot(cidBuf)
+        //const cidBufLen = selfRoot(cidBuf)
         //const readCid = root()
 
         return new State(u32(0))
