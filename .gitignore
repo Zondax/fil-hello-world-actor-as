@@ -3,3 +3,5 @@
 .idea
 .DS_Store
 testing/target
+debug-final.wasm
+release-final.wasm

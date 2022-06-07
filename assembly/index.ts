@@ -1,8 +1,7 @@
 import {caller, methodNumber} from "fvm-as-sdk/assembly";
 import {usrForbidden, usrUnhandledMsg} from "fvm-as-sdk/assembly";
 import {ActorID, NO_DATA_BLOCK_ID} from "fvm-as-sdk/assembly";
-import {saveState} from "./state";
-
+import {State} from "./state";
 
 export function invoke(_: u32): u32 {
   const methodNum = methodNumber()
@@ -11,9 +10,9 @@ export function invoke(_: u32): u32 {
     case 1:
       constructor()
       break
-    /*case 2:
+    case 2:
       say_hello()
-      break*/
+      break
     default:
       usrUnhandledMsg()
   }
@@ -23,22 +22,21 @@ export function invoke(_: u32): u32 {
 
 function constructor(): void {
   // This constant should be part of the SDK.
-  const INIT_ACTOR_ADDR: ActorID = 10000;
+  const INIT_ACTOR_ADDR: ActorID = 1;
 
-  //if ( caller() != INIT_ACTOR_ADDR ) usrForbidden()
+  if ( caller() != INIT_ACTOR_ADDR ) usrForbidden()
 
-  /*const state = new State(0)
-  state.save()*/
-  saveState(0)
+  const state = new State(0)
+  state.save()
 
   return;
 }
 
 // Not working
 function say_hello(): Uint8Array {
-  /*const state = State.load();
+  const state = State.load();
   state.count += 1;
-  state.save();*/
+  state.save();
 
   const ret = new Uint8Array(2); // "A"
   ret[0] = 97;

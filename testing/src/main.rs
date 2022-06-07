@@ -11,10 +11,9 @@ use fvm_ipld_encoding::RawBytes;
 use fvm_shared::address::Address;
 use fvm_shared::bigint::BigInt;
 use std::env;
-use std::str::FromStr;
 
 const WASM_COMPILED_PATH: &str =
-    "../build/release.wasm";
+    "../release-final.wasm";
 
 /// The state object.
 #[derive(Serialize_tuple, Deserialize_tuple, Clone, Debug, Default)]
@@ -68,15 +67,18 @@ fn main() {
 
     dbg!(hex::encode(&*RawBytes::serialize(params).unwrap()));*/
 
-    println!("Calling `say_hello()`. This should update state.");
+    println!("Calling construct");
     let message = Message {
         from: sender[0].1,
         to: init_actor::INIT_ACTOR_ADDR,
         gas_limit: 1000000000,
         method_num: 2,
-        params: RawBytes::new(hex::decode("82d82a5827000155a0e4022051b3ffb118f0d960b936e744c665f266d3c110a40c9426665f6563da62642bb540").unwrap()),
+        params: RawBytes::new(hex::decode("82d82a5827000155a0e4022002646fb340f5c4ef9e5846a589a04bef4e1abfb79601a7074352f3ba3bae22ed40").unwrap()),
+        // 82d82a5827000155a0e40220d06c3cd58386c52ad72b4d154e8c82b7c77580a0817d64099a1c44ca58b363aa40
+        //params: RawBytes::new(hex::decode("82d82a5827000155a0e40220d06c3cd58386c52ad72b4d154e8c82b7c77580a0817d64099a1c44ca58b363aa40").unwrap()),
         ..Message::default()
     };
+
 
     let res = tester
     .executor
