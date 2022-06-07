@@ -1,6 +1,7 @@
 import {setRoot} from "@zondax/fvm-as-sdk/assembly/wrappers";
 import {Put, root} from "@zondax/fvm-as-sdk/assembly/helpers";
-import {Cid, DAG_CBOR} from "@zondax/fvm-as-sdk/assembly/env";
+import {Cid, DAG_CBOR, MAX_CID_LEN} from "@zondax/fvm-as-sdk/assembly/env";
+import {root as selfRoot} from "@zondax/fvm-as-sdk/assembly/wrappers/self";
 
 export class State {
     count:u32
@@ -21,6 +22,8 @@ export class State {
     }
 
     static load(): State{
+        const cidBuf = new Uint8Array(MAX_CID_LEN)
+        const cidBufLen = selfRoot(cidBuf)
         //const readCid = root()
 
         return new State(u32(0))
