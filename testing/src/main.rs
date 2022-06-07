@@ -13,7 +13,7 @@ use fvm_shared::bigint::BigInt;
 use std::env;
 
 const WASM_COMPILED_PATH: &str =
-    "../release-final.wasm";
+    "../build/release-final.wasm";
 
 /// The state object.
 #[derive(Serialize_tuple, Deserialize_tuple, Clone, Debug, Default)]

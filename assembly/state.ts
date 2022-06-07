@@ -12,7 +12,7 @@ export class State {
     save(): Cid{
         const cborBytes: Uint8Array = new Uint8Array(2); // [129, 0]
         cborBytes[0] = 129;
-        cborBytes[1] = 0; 
+        cborBytes[1] = 0;
         const stCid = Put(0xb220, 32, DAG_CBOR, cborBytes)
 
         setRoot(stCid)
@@ -23,13 +23,4 @@ export class State {
     static load(): State{
         return new State(u32(0))
     }
-}
-
-export function saveState(count: u32): void {
-    const cborBytes: Uint8Array = new Uint8Array(2); // [129, 0]
-    cborBytes[0] = 129;
-    cborBytes[1] = 1;
-    const stCid = Put(0xb220, 32, DAG_CBOR, cborBytes)
-
-    setRoot(stCid)
 }
