@@ -1,46 +1,51 @@
-name: Build
+name: "Checks"
 on:
   - push
 
-
-env:
-  LOTUS_PATH: ~/.lotus-local-net
-  LOTUS_MINER_PATH: ~/.lotus-miner-local-net
-  LOTUS_SKIP_GENESIS_CHECK: _yes_
-  CGO_CFLAGS_ALLOW: "-D__BLST_PORTABLE__"
-  CGO_CFLAGS: "-D__BLST_PORTABLE__"
-
 jobs:
-  build:
+  build-test:
+    name: "Build and Test"
     timeout-minutes: 5
     runs-on: self-hosted
+    env:
+      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          submodules: true
       - name: Install node
         uses: actions/setup-node@v2
         with:
           node-version: '16.13.0'
+      - name: Install latest stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Set npmrc
+        run: |
+          yarn config set @zondax:registry https://verdaccio.zondax.net/
+          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
+          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
-          npm install -g yarn
           yarn install
+          make deps
       - name: Build WASM file
-        run: yarn asbuild
+        run: make build
       - name: Install Hello Actor in Lotus
         run: |
-          ~/lotus/lotus version
-          ~/lotus/lotus chain install-actor build/debug.wasm >> output.txt
+          lotus version
+          lotus chain install-actor build/release-final.wasm >> output.txt
           cat output.txt
       - name: Create Hello Actor in Lotus
         run: |
           cid=$(sed -n 's/^Actor Code CID: //p' output.txt)
           echo $cid
-          ~/lotus/lotus chain create-actor $cid >> output.txt
+          lotus chain create-actor $cid >> output.txt
           cat output.txt
       - name: Get status actor
         run: |
           address=$(sed -n 's/^ID Address: //p' output.txt)
-          ~/lotus/lotus state get-actor $address
+          lotus state get-actor $address
