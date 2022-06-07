@@ -2,14 +2,6 @@ name: "Checks"
 on:
   - push
 
-
-env:
-  LOTUS_PATH: ~/.lotus-local-net
-  LOTUS_MINER_PATH: ~/.lotus-miner-local-net
-  LOTUS_SKIP_GENESIS_CHECK: _yes_
-  CGO_CFLAGS_ALLOW: "-D__BLST_PORTABLE__"
-  CGO_CFLAGS: "-D__BLST_PORTABLE__"
-
 jobs:
   build-test:
     name: "Build and Test"
@@ -44,16 +36,16 @@ jobs:
         run: make build
       - name: Install Hello Actor in Lotus
         run: |
-          ~/lotus/lotus version
-          ~/lotus/lotus chain install-actor build/release-final.wasm >> output.txt
+          lotus version
+          lotus chain install-actor build/release-final.wasm >> output.txt
           cat output.txt
       - name: Create Hello Actor in Lotus
         run: |
           cid=$(sed -n 's/^Actor Code CID: //p' output.txt)
           echo $cid
-          ~/lotus/lotus chain create-actor $cid >> output.txt
+          lotus chain create-actor $cid >> output.txt
           cat output.txt
       - name: Get status actor
         run: |
           address=$(sed -n 's/^ID Address: //p' output.txt)
-          ~/lotus/lotus state get-actor $address
+          lotus state get-actor $address
