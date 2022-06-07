@@ -1,6 +1,6 @@
-import {Put} from "@zondax/fvm-as-sdk/assembly";
-import {Cid, DAG_CBOR} from "@zondax/fvm-as-sdk/assembly";
-import {setRoot} from "@zondax/fvm-as-sdk/assembly";
+import {setRoot} from "@zondax/fvm-as-sdk/assembly/wrappers";
+import {Put, root} from "@zondax/fvm-as-sdk/assembly/helpers";
+import {Cid, DAG_CBOR} from "@zondax/fvm-as-sdk/assembly/env";
 
 export class State {
     count:u32
@@ -21,6 +21,8 @@ export class State {
     }
 
     static load(): State{
+        const readCid = root()
+
         return new State(u32(0))
     }
 }

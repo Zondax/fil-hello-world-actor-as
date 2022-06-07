@@ -49,3 +49,7 @@ jobs:
         run: |
           address=$(sed -n 's/^ID Address: //p' output.txt)
           lotus state get-actor $address
+      - name: Invoke actor's method 2
+        run: |
+          address=$(sed -n 's/^ID Address: //p' output.txt)
+          lotus chain invoke $address 2

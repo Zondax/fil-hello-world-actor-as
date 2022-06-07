@@ -1,6 +1,5 @@
-import {caller, methodNumber} from "@zondax/fvm-as-sdk/assembly";
-import {usrForbidden, usrUnhandledMsg} from "@zondax/fvm-as-sdk/assembly";
-import {ActorID, NO_DATA_BLOCK_ID} from "@zondax/fvm-as-sdk/assembly";
+import {caller, methodNumber, usrUnhandledMsg, usrForbidden} from "@zondax/fvm-as-sdk/assembly/wrappers";
+import {NO_DATA_BLOCK_ID, ActorID} from "@zondax/fvm-as-sdk/assembly/env";
 import {State} from "./state";
 
 export function invoke(_: u32): u32 {
@@ -33,14 +32,14 @@ function constructor(): void {
 }
 
 // Not working
-function say_hello(): Uint8Array {
+function say_hello(): void {
   const state = State.load();
-  state.count += 1;
+  /*state.count += 1;
   state.save();
 
   const ret = new Uint8Array(2); // "A"
   ret[0] = 97;
   ret[1] = 65;
 
-  return ret;
+  return ret;*/
 }
