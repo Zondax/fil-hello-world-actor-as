@@ -14,6 +14,8 @@ jobs:
   build:
     timeout-minutes: 5
     runs-on: self-hosted
+    env:
+      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -23,16 +25,27 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.13.0'
+      - name: Install latest stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Set npmrc
+        run: |
+          yarn config set @zondax:registry https://verdaccio.zondax.net/
+          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
+          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
           npm install -g yarn
           yarn install
+          make deps
       - name: Build WASM file
-        run: yarn asbuild
+        run: make build
       - name: Install Hello Actor in Lotus
         run: |
           ~/lotus/lotus version
-          ~/lotus/lotus chain install-actor build/debug.wasm >> output.txt
+          ~/lotus/lotus chain install-actor build/release-final.wasm >> output.txt
           cat output.txt
       - name: Create Hello Actor in Lotus
         run: |
