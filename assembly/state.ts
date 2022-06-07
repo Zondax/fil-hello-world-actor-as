@@ -21,7 +21,7 @@ export class State {
     }
 
     static load(): State{
-        const readCid = root()
+        //const readCid = root()
 
         return new State(u32(0))
     }

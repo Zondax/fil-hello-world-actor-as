@@ -33,7 +33,7 @@ function constructor(): void {
 
 // Not working
 function say_hello(): void {
-  //const state = State.load();
+  const state = State.load();
   /*state.count += 1;
   state.save();
 
