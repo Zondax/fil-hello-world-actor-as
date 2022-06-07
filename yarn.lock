@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@zondax/fvm-as-sdk@^0.1.2":
-  version "0.1.2"
-  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.1.2.tgz#ab4ab4a5f0ec2e6f2e948b00adddcd441866bee7"
-  integrity sha512-NCMeTh9yDzOSv9D3TrUA/9Jc/LVzp7dmNP6ta3NGe8doEAtYheuzBUc+QqHoXBfbUcpPCsrUSsPaeueoyaRPYg==
+"@zondax/fvm-as-sdk@^0.1.4-rc1":
+  version "0.1.4-rc1"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.1.4-rc1.tgz#641fadb57eb14bf31ce4d0323e2695fb9a715467"
+  integrity sha512-XgxIYVrzyWyEy1fLwhH+hbRNQAuN0BLk6FKUOMLXOM4YUz0vWQvqoOr+nMI9SNxv9Fgrr4YaeMSlCuquZG+yxA==
 
 assemblyscript@^0.20.4:
   version "0.20.7"

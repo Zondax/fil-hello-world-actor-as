@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Zondax/fil-hello-world-actor-as#readme",
   "dependencies": {
-    "@zondax/fvm-as-sdk": "^0.1.2",
+    "@zondax/fvm-as-sdk": "^0.1.4-rc1",
     "assemblyscript": "^0.20.4"
   },
   "type": "module",
