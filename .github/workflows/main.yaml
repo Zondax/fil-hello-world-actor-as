@@ -60,6 +60,13 @@ jobs:
         run: |
           address=$(sed -n 's/^ID Address: //p' create.txt)
           lotus chain invoke $address 2
+      - name: Get status actor
+        run: |
+          address=$(sed -n 's/^ID Address: //p' create.txt)
+          echo $address
+          rm actor.txt
+          lotus state get-actor $address >> actor.txt
+          cat actor.txt
       - name: Get chain state
         run: |
           head=$(sed -n 's/^Head:		//p' actor.txt)
