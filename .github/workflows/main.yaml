@@ -53,7 +53,7 @@ jobs:
           cat actor.txt
       - name: Get chain state
         run: |
-          head=$(sed -n 's/^Head: //p' actor.txt)
+          head=$(sed -n 's/^Head:		//p' actor.txt)
           echo $head
           lotus chain get $head
       - name: Invoke actor's method 2
@@ -62,6 +62,6 @@ jobs:
           lotus chain invoke $address 2
       - name: Get chain state
         run: |
-          head=$(sed -n 's/^Head: //p' actor.txt)
+          head=$(sed -n 's/^Head:		//p' actor.txt)
           echo $head
           lotus chain get $head
