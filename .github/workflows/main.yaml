@@ -34,8 +34,8 @@ jobs:
       - name: Set npmrc
         run: |
           yarn config set @zondax:registry https://verdaccio.zondax.net/
-          yarn config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          yarn config set //verdaccio.zondax.net/:always-auth true
+          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
+          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
           yarn install
