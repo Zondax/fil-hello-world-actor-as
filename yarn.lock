@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-as-wasi@^0.4.6:
-  version "0.4.6"
-  resolved "https://registry.npmjs.org/as-wasi/-/as-wasi-0.4.6.tgz"
-  integrity sha512-HFWdxLVHrOfchf/M+gE2IczsHBkWXqekZZfHYmDj6WP1UnpQC4k44OeyjqmSwC/db1tppEwCUssDCuFGnMdJZw==
+"@zondax/fvm-as-sdk@^0.1.1":
+  version "0.1.1"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.1.1.tgz#d559f9cf2282f73c1803549a77970fd19a246d84"
+  integrity sha512-yGZ+/+mX2bCsWk8wO//AKVWbcDuaa2eBAdpR5Ci4+auzROdrdVE8F7z7ZCRfH9pvFGtVPYwJMLkCqODPLmbKzA==
 
 assemblyscript@^0.20.4:
   version "0.20.7"

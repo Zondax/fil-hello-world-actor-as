@@ -1,6 +1,6 @@
-import {Put} from "fvm-as-sdk/assembly";
-import {Cid, DAG_CBOR} from "fvm-as-sdk/assembly";
-import {setRoot} from "fvm-as-sdk/assembly";
+import {Put} from "@zondax/fvm-as-sdk/assembly";
+import {Cid, DAG_CBOR} from "@zondax/fvm-as-sdk/assembly";
+import {setRoot} from "@zondax/fvm-as-sdk/assembly";
 
 export class State {
     count:u32

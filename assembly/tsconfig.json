@@ -1,5 +1,5 @@
 {
-  "extends": "fvm-as-sdk/assembly/tsconfig.json",
+  "extends": "@zondax/fvm-as-sdk/assembly/tsconfig.json",
   "include": [
     "./**/*.ts"
   ]

@@ -1,6 +1,6 @@
-import {caller, methodNumber} from "fvm-as-sdk/assembly";
-import {usrForbidden, usrUnhandledMsg} from "fvm-as-sdk/assembly";
-import {ActorID, NO_DATA_BLOCK_ID} from "fvm-as-sdk/assembly";
+import {caller, methodNumber} from "@zondax/fvm-as-sdk/assembly";
+import {usrForbidden, usrUnhandledMsg} from "@zondax/fvm-as-sdk/assembly";
+import {ActorID, NO_DATA_BLOCK_ID} from "@zondax/fvm-as-sdk/assembly";
 import {State} from "./state";
 
 export function invoke(_: u32): u32 {
