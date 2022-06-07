@@ -34,9 +34,9 @@ function constructor(): void {
 // Not working
 function say_hello(): void {
   const state = State.load();
-  /*state.count += 1;
+  state.count += 1;
   state.save();
-
+/*
   const ret = new Uint8Array(2); // "A"
   ret[0] = 97;
   ret[1] = 65;

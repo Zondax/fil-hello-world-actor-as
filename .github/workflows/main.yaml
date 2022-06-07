@@ -37,19 +37,31 @@ jobs:
       - name: Install Hello Actor in Lotus
         run: |
           lotus version
-          lotus chain install-actor build/release-final.wasm >> output.txt
-          cat output.txt
+          lotus chain install-actor build/release-final.wasm >> install.txt
+          cat install.txt
       - name: Create Hello Actor in Lotus
         run: |
-          cid=$(sed -n 's/^Actor Code CID: //p' output.txt)
+          cid=$(sed -n 's/^Actor Code CID: //p' install.txt)
           echo $cid
-          lotus chain create-actor $cid >> output.txt
-          cat output.txt
+          lotus chain create-actor $cid >> create.txt
+          cat create.txt
       - name: Get status actor
         run: |
-          address=$(sed -n 's/^ID Address: //p' output.txt)
-          lotus state get-actor $address
+          address=$(sed -n 's/^ID Address: //p' create.txt)
+          echo $address
+          lotus state get-actor $address >> actor.txt
+          cat actor.txt
+      - name: Get chain state
+        run: |
+          head=$(sed -n 's/^Head: //p' actor.txt)
+          echo $head
+          lotus chain get $head
       - name: Invoke actor's method 2
         run: |
-          address=$(sed -n 's/^ID Address: //p' output.txt)
+          address=$(sed -n 's/^ID Address: //p' create.txt)
           lotus chain invoke $address 2
+      - name: Get chain state
+        run: |
+          head=$(sed -n 's/^Head: //p' actor.txt)
+          echo $head
+          lotus chain get $head
