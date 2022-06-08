@@ -14,7 +14,8 @@ The following instructions can be used to build this project locally, copy the b
 
 #### Build and connect to pod
 ```
-yarn asbuild
+make deps
+make build
 kubectl config use-context sandbox
 kubectl -n filecoin-node cp build/final-release.wasm <pod-name>:/tmp/fil-actor-hello-world-as.wasm
 ```
@@ -24,6 +25,7 @@ kubectl -n filecoin-node cp build/final-release.wasm <pod-name>:/tmp/fil-actor-h
 kubectl exec -it -n <namespace> <pod-name> -- bash
 lotus chain install-actor /tmp/fil-actor-hello-world-as.wasm
 lotus chain create-actor <actor-id-from-previous-step>
+lotus chain invoke 2
 ```
 
 ### On Rust VM
