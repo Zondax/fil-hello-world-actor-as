@@ -30,8 +30,5 @@
       "import": "./build/release.js",
       "types": "./build/release.d.ts"
     }
-  },
-  "devDependencies": {
-    "assemblyscript": "^0.20.4"
   }
 }
