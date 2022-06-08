@@ -42,6 +42,7 @@ jobs:
       - name: Test WASM on Rust VM
         run: |
           cd testing
+          rustup target add wasm32-unknown-unknown
           RUST_BACKTRACE=1 cargo r
       - name: Install Hello Actor in Lotus
         run: |
