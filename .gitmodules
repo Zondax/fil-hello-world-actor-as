@@ -1,0 +1,3 @@
+[submodule "benchmarking/fil-hello-world-actor"]
+	path = benchmarking/fil-hello-world-actor
+	url = git@github.com:raulk/fil-hello-world-actor.git
