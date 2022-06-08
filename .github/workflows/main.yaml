@@ -46,6 +46,8 @@ jobs:
     timeout-minutes: 10
     runs-on: self-hosted
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Cache/restore binaries
         uses: actions/cache@v1
         with:
@@ -97,6 +99,8 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Cache/restore binaries
         uses: actions/cache@v1
         with:
