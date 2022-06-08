@@ -34,6 +34,10 @@ jobs:
           make deps
       - name: Build WASM file
         run: make build
+      - name: Test WASM on Rust VM
+        run: |
+          cd testing
+          cargo r
       - name: Install Hello Actor in Lotus
         run: |
           lotus version
