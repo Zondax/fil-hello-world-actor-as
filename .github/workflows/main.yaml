@@ -42,7 +42,7 @@ jobs:
       - name: Test WASM on Rust VM
         run: |
           cd testing
-          cargo r
+          RUST_BACKTRACE=1 cargo r
       - name: Install Hello Actor in Lotus
         run: |
           lotus version
