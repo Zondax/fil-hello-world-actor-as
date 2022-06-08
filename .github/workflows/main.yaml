@@ -3,9 +3,9 @@ on:
   - push
 
 jobs:
-  build-test:
-    name: "Build and Test"
-    timeout-minutes: 5
+  build:
+    name: "Build"
+    timeout-minutes: 10
     runs-on: self-hosted
     env:
       VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
@@ -34,6 +34,25 @@ jobs:
           make deps
       - name: Build WASM file
         run: make build
+      - name: Cache/restore binaries
+        uses: actions/cache@v1
+        with:
+          path: ./build
+          key: ${{ runner.os }}-${{ github.run_id }}
+
+  test-lotus:
+    name: "Test in Lotus"
+    needs: [build]
+    timeout-minutes: 10
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache/restore binaries
+        uses: actions/cache@v1
+        with:
+          path: ./build
+          key: ${{ runner.os }}-${{ github.run_id }}
       - name: Install Hello Actor in Lotus
         run: |
           lotus version
@@ -72,3 +91,46 @@ jobs:
           head=$(sed -n 's/^Head:		//p' actor.txt)
           echo $head
           lotus chain get $head
+
+
+  test-rust-vm:
+    name: "Test in Rust VM"
+    needs: [build]
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache/restore binaries
+        uses: actions/cache@v1
+        with:
+          path: ./build
+          key: ${{ runner.os }}-${{ github.run_id }}
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly-2022-03-31
+          override: true
+      - name: Restore crates
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
+      - name: Test WASM on Rust VM
+        run: |
+          cd testing
+          rustup target add wasm32-unknown-unknown
+          RUST_BACKTRACE=1 cargo r
+      - name: Save crates
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
