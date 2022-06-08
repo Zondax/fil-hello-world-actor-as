@@ -101,15 +101,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Restore crates
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
       - name: Cache/restore binaries
         uses: actions/cache@v1
         with:
@@ -120,6 +111,15 @@ jobs:
         with:
           toolchain: nightly-2022-03-31
           override: true
+      - name: Restore crates
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
       - name: Test WASM on Rust VM
         run: |
           cd testing
