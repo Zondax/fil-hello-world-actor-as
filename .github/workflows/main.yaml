@@ -37,7 +37,7 @@ jobs:
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.62.0-nightly
+          toolchain: nightly-2022-03-31
           override: true
       - name: Test WASM on Rust VM
         run: |
