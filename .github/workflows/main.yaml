@@ -101,7 +101,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/cache@v3
+      - name: Restore crates
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/bin/
@@ -124,3 +125,12 @@ jobs:
           cd testing
           rustup target add wasm32-unknown-unknown
           RUST_BACKTRACE=1 cargo r
+      - name: Save crates
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
