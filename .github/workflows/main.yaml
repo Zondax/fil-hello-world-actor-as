@@ -34,6 +34,11 @@ jobs:
           make deps
       - name: Build WASM file
         run: make build
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
       - name: Test WASM on Rust VM
         run: |
           cd testing
