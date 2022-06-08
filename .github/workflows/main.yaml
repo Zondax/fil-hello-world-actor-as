@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     name: "Build"
-    timeout-minutes: 10
+    timeout-minutes: 5
     runs-on: self-hosted
     env:
       VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
@@ -43,7 +43,7 @@ jobs:
   test-lotus:
     name: "Test in Lotus"
     needs: [build]
-    timeout-minutes: 10
+    timeout-minutes: 5
     runs-on: self-hosted
     steps:
       - name: Checkout
@@ -96,7 +96,7 @@ jobs:
   test-rust-vm:
     name: "Test in Rust VM"
     needs: [build]
-    timeout-minutes: 10
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
