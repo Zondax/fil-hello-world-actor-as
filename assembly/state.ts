@@ -1,6 +1,7 @@
 import {setRoot} from "@zondax/fvm-as-sdk/assembly/wrappers";
 import {Put, Get, root} from "@zondax/fvm-as-sdk/assembly/helpers";
 import {Cid, DAG_CBOR} from "@zondax/fvm-as-sdk/assembly/env";
+import {CBOREncoder} from "@zondax/assemblyscript-cbor/assembly";
 
 // This class represents the actor state.
 // On save and load functions, persistence can be implemented.
@@ -16,14 +17,17 @@ export class State {
 
     // Function responsible to serialize state and save it to IPLD
     save(): Cid{
-        // This serialization is pretty basic. It will be replaced by some CBOR lib for AssemblyScript
-        const cborBytes: Uint8Array = new Uint8Array(2);
-        cborBytes[0] = 129; // Represents an array on CBOR
-        cborBytes[1] = this.count; // First position of the array
+        // Create some data array
+        const data = new Array<u8>()
+        data.push(this.count)
+
+        // Use CBOREncoder to serialize data into CBOR
+        const encoder = new CBOREncoder();
+        encoder.addArrayU8(data)
 
         // Create a new block on IPLD with serialized data
         // It returns the id of that new block
-        const stCid = Put(0xb220, 32, DAG_CBOR, cborBytes)
+        const stCid = Put(0xb220, 32, DAG_CBOR, Uint8Array.wrap(encoder.serialize()))
 
         // setRoot allows to attach that new block to the actor instance that is running
         // If this is not done, the block won't be related to this actor, and it won't be able
