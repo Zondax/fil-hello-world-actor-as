@@ -10,6 +10,10 @@ use fvm_shared::address::Address;
 use fvm_shared::bigint::BigInt;
 use std::env;
 use fvm::executor::ApplyRet;
+use std::fs;
+
+#[macro_use] extern crate prettytable;
+use prettytable::Table;
 
 const RUST_WASM_COMPILED_PATH: &str =
     "./rust-hello-world-actor.wasm";
@@ -80,19 +84,28 @@ fn run_fvm(path: &str) -> ApplyRet {
 fn main() {
     println!("Running benchmark");
 
-    let res_rust = run_fvm(RUST_WASM_COMPILED_PATH);
 
-    println!("Rust gas used : {}", &res_rust.msg_receipt.gas_used);
+    let res_rust = run_fvm(RUST_WASM_COMPILED_PATH);
+    let rust_size = fs::metadata(RUST_WASM_COMPILED_PATH).unwrap();
+
 
     let res_as_incremental = run_fvm(AS_INCREMENTAL_WASM_COMPILED_PATH);
+    let as_incremental_size = fs::metadata(AS_INCREMENTAL_WASM_COMPILED_PATH).unwrap();
 
-    println!("Assemblyscript (incremental) gas used : {}", res_as_incremental.msg_receipt.gas_used);
 
     let res_as_minimal = run_fvm(AS_MINIMAL_WASM_COMPILED_PATH);
+    let as_minimal_size = fs::metadata(AS_MINIMAL_WASM_COMPILED_PATH).unwrap();
 
-    println!("Assemblyscript (minimal) gas used : {}", res_as_minimal.msg_receipt.gas_used);
 
     let res_as_stub = run_fvm(AS_STUB_WASM_COMPILED_PATH);
+    let as_stub_size = fs::metadata(AS_STUB_WASM_COMPILED_PATH).unwrap();
 
-    println!("Assemblyscript (stub) gas used : {}", res_as_stub.msg_receipt.gas_used);
+    let mut table = Table::new();
+    table.add_row(row!["ACTOR FILE", "GAS USED (say_hello())", "FILE SIZE"]);
+    table.add_row(row!["Rust actor", res_rust.msg_receipt.gas_used, rust_size.len()]);
+    table.add_row(row!["Assemblyscript (incremental)", res_as_incremental.msg_receipt.gas_used, as_incremental_size.len()]);
+    table.add_row(row!["Assemblyscript (minimal)", res_as_minimal.msg_receipt.gas_used, as_minimal_size.len()]);
+    table.add_row(row!["Assemblyscript (stub)", res_as_stub.msg_receipt.gas_used, as_stub_size.len()]);
+
+    table.printstd();
 }
