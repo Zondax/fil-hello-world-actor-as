@@ -143,6 +143,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
       - name: Cache/restore binaries
         uses: actions/cache@v1
         with:
