@@ -14,15 +14,15 @@
     "type": "git",
     "url": "git+https://github.com/Zondax/fil-hello-world-actor-as.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Zondax AG",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Zondax/fil-hello-world-actor-as/issues"
   },
   "homepage": "https://github.com/Zondax/fil-hello-world-actor-as#readme",
   "dependencies": {
     "@zondax/assemblyscript-cbor": "^0.3.1",
-    "@zondax/fvm-as-sdk": "^0.2.0",
+    "@zondax/fvm-as-sdk": "^0.1.5",
     "assemblyscript": "^0.20.8"
   },
   "type": "module",
