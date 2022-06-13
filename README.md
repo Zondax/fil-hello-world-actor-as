@@ -25,7 +25,7 @@ kubectl -n filecoin-node cp build/final-release.wasm <pod-name>:/tmp/fil-actor-h
 kubectl exec -it -n <namespace> <pod-name> -- bash
 lotus chain install-actor /tmp/fil-actor-hello-world-as.wasm
 lotus chain create-actor <actor-id-from-previous-step>
-lotus chain invoke 2
+lotus chain invoke <address-id-from-previous-step> 2
 ```
 
 ### On Rust VM
