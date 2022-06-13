@@ -8,7 +8,8 @@ benchmark:
 	cargo r
 
 build-rust:
-	cd fil-hello-world-actor && cargo build 
+	cd fil-hello-world-actor && cargo build
+	ls fil-hello-world-actor/target/debug/wbuild/fil_hello_world_actor/
 	mv fil-hello-world-actor/target/debug/wbuild/fil_hello_world_actor/fil_hello_world_actor.compact.wasm ./temp/rust-hello-world-actor.wasm
 
 build-as-incremental:
