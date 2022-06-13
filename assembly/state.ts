@@ -1,4 +1,4 @@
-import {BaseState} from "@zondax/fvm-as-sdk/assembly/utils/state/state";
+import {BaseState} from "@zondax/fvm-as-sdk/assembly/utils/state";
 import {Value} from "@zondax/assemblyscript-cbor/assembly/types";
 import {CBOREncoder} from "@zondax/assemblyscript-cbor/assembly";
 import {Obj, Integer} from "@zondax/assemblyscript-cbor/assembly/types";
