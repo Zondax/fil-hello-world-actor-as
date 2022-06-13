@@ -1,11 +1,10 @@
 import {BaseState} from "@zondax/fvm-as-sdk/assembly/utils/state";
-import {Value} from "@zondax/assemblyscript-cbor/assembly/types";
+import {Value, Obj, Integer} from "@zondax/assemblyscript-cbor/assembly/types";
 import {CBOREncoder} from "@zondax/assemblyscript-cbor/assembly";
-import {Obj, Integer} from "@zondax/assemblyscript-cbor/assembly/types";
 
 // This class represents the actor state.
-// On save and load functions, persistence can be implemented.
-// Any value we can keep between calls should be written to the storage (IPLD)
+// The BaseState is an abstract class. It has IPLD logic to read and write data to storage
+// Any state class only needs to extend it, and implement encode, parse and load functions
 export class State extends BaseState{
     // In this case, we only keep a counter
     count:u64
@@ -16,6 +15,7 @@ export class State extends BaseState{
         this.count = count;
     }
 
+    // This function should only indicate how to serialize the store into CBOR
     protected encode(): ArrayBuffer {
         // Use CBOREncoder to serialize data into CBOR
         const encoder = new CBOREncoder();
@@ -26,6 +26,7 @@ export class State extends BaseState{
         return encoder.serialize()
     }
 
+    // This function should only indicate how to convert from a generic object model to this state class
     protected parse(rawState: Value): State {
         let counter:i64 = 0
         if(rawState.isObj){
