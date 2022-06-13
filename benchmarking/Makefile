@@ -29,7 +29,7 @@ build-as-stub:
 build-as: build-as-incremental build-as-minimal build-as-stub
 
 install-tinygo:
-	git clone git@github.com:ipfs-force-community/tinygo.git /tmp/tinygo
+	git clone https://github.com/ipfs-force-community/tinygo.git /tmp/tinygo
 	cd /tmp/tinygo && \
 	git checkout fvm && \
 	git submodule update --init && \
