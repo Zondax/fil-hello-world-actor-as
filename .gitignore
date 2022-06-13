@@ -6,4 +6,4 @@ testing/target
 .yalc
 yalc.lock
 benchmarking/target
-benchmarking/*.wasm
+benchmarking/temp
