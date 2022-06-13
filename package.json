@@ -14,8 +14,8 @@
     "type": "git",
     "url": "git+https://github.com/Zondax/fil-hello-world-actor-as.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Zondax AG",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Zondax/fil-hello-world-actor-as/issues"
   },
