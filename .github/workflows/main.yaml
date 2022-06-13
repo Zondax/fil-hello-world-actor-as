@@ -165,6 +165,7 @@ jobs:
       - name: Test WASM on Rust VM
         run: |
           cd benchmarking
+          rustup target add wasm32-unknown-unknown
           make install
           make benchmark
       - name: Save crates
