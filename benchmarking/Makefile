@@ -1,5 +1,6 @@
 install:
 	npm install -g assemblyscript
+	yarn --cwd ../ install
 	cargo install wizer --all-features
 
 benchmark:
