@@ -7,3 +7,4 @@ testing/target
 yalc.lock
 benchmarking/target
 benchmarking/temp
+benchmarking/benchmark_results.csv

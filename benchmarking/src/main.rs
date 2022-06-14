@@ -130,5 +130,15 @@ fn main() {
         format!("{} (+{})",go_size, go_size-min_file_size)],
     );
 
+    let path = std::path::Path::new("benchmark_results.csv");
+    let display = path.display();
+
+    let out = match fs::File::create(&path) {
+        Err(why) => panic!("couldn't create {}: {}", display, why),
+        Ok(file) => file,
+    };
+
+    table.to_csv(out).expect("table cannot be written to csv");
+
     table.printstd();
 }

@@ -184,6 +184,10 @@ jobs:
           make install-llvm-ci
           make install-tinygo
           make benchmark
+      - uses: actions/upload-artifact@v3
+        with:
+          name: benchmark_results
+          path: ./benchmarking/benchmark_results.csv
       - name: Save crates
         uses: actions/cache@v3
         with:
