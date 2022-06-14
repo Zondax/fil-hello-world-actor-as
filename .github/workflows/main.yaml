@@ -137,7 +137,7 @@ jobs:
 
   benchmark:
     name: "Benchmark"
-    #needs: [test-rust-vm, test-lotus]
+    needs: [build]
     timeout-minutes: 30
     runs-on: ubuntu-latest
     env:
@@ -147,11 +147,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Checkout submodules
         run: git submodule update --init --recursive
-      - name: Cache/restore binaries
-        uses: actions/cache@v1
-        with:
-          path: ./build
-          key: ${{ runner.os }}-${{ github.run_id }}
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
         with:
@@ -169,7 +164,7 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./benchmarking/Cargo.lock') }}
       - name: Set npmrc
         run: |
           yarn config set @zondax:registry https://verdaccio.zondax.net/
@@ -184,6 +179,11 @@ jobs:
           make install-llvm-ci
           make install-tinygo
           make benchmark
+      - name: "Save results"
+        uses: actions/upload-artifact@v3
+        with:
+          name: benchmark_results
+          path: ./benchmarking/benchmark_results.csv
       - name: Save crates
         uses: actions/cache@v3
         with:
@@ -192,4 +192,4 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./benchmarking/Cargo.lock') }}
