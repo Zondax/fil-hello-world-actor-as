@@ -138,7 +138,7 @@ jobs:
   benchmark:
     name: "Benchmark"
     #needs: [test-rust-vm, test-lotus]
-    timeout-minutes: 20
+    timeout-minutes: 30
     runs-on: ubuntu-latest
     env:
       VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
