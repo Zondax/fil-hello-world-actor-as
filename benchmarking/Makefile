@@ -1,5 +1,6 @@
 install:
 	npm install -g assemblyscript
+	cargo install wizer --all-features
 
 benchmark:
 	mkdir -p temp
