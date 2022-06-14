@@ -1,5 +1,5 @@
 import {BaseState} from "@zondax/fvm-as-sdk/assembly/utils/state";
-import {Value, Obj, Integer} from "@zondax/assemblyscript-cbor/assembly/types";
+import {Value, Arr, Integer} from "@zondax/assemblyscript-cbor/assembly/types";
 import {CBOREncoder} from "@zondax/assemblyscript-cbor/assembly";
 
 // This class represents the actor state.
@@ -7,21 +7,22 @@ import {CBOREncoder} from "@zondax/assemblyscript-cbor/assembly";
 // Any state class only needs to extend it, and implement encode, parse and load functions
 export class State extends BaseState{
     // In this case, we only keep a counter
-    count:u64
+    count:u8
 
     // Set initial value when instantiating a new state
-    constructor(count: u64) {
+    constructor(count: u8) {
         super();
         this.count = count;
     }
 
     // This function should only indicate how to serialize the store into CBOR
     protected encode(): ArrayBuffer {
+        const data = new Array<u8>()
+        data.push(this.count)
+
         // Use CBOREncoder to serialize data into CBOR
         const encoder = new CBOREncoder();
-        encoder.addObject(1)
-        encoder.addKey("counter")
-        encoder.addUint64(this.count)
+        encoder.addArrayU8(data)
 
         return encoder.serialize()
     }
@@ -29,19 +30,20 @@ export class State extends BaseState{
     // This function should only indicate how to convert from a generic object model to this state class
     protected parse(rawState: Value): State {
         let counter:i64 = 0
-        if(rawState.isObj){
+        if(rawState.isArr){
             // Here we cast as object as we know that is what we saved before
-            const state = rawState as Obj
+            const state = rawState as Arr
 
             // Get counter
-            if(state.has("counter"))
-                counter = (state.get("counter") as Integer).valueOf()
+            const value = state.valueOf().at(0)
+            if(value.isInteger)
+                counter = (value as Integer).valueOf()
         }
 
-        return new State(counter)
+        return new State(u8(counter))
     }
 
     static load():State{
-        return new State(0).load() as State
+        return new State(u8(0)).load() as State
     }
 }
