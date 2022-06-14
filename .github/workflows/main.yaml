@@ -137,7 +137,7 @@ jobs:
 
   benchmark:
     name: "Benchmark"
-    #needs: [test-rust-vm, test-lotus]
+    needs: [build]
     timeout-minutes: 30
     runs-on: ubuntu-latest
     env:
