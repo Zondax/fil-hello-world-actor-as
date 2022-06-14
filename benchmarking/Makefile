@@ -28,11 +28,13 @@ build-as-stub:
 
 build-as: build-as-incremental build-as-minimal build-as-stub
 
-install-tinygo:
-	echo 'deb http://apt.llvm.org/xxxxx/ llvm-toolchain-xxxxx-13 main' | sudo tee /etc/apt/sources.list.d/llvm.list
+install-llvm-ci:
+	echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' | sudo tee /etc/apt/sources.list.d/llvm.list
 	wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
 	sudo apt-get update
 	sudo apt-get install clang-13 llvm-13-dev lld-13 libclang-13-dev
+
+install-tinygo:
 	git clone https://github.com/ipfs-force-community/tinygo.git /tmp/tinygo
 	cd /tmp/tinygo && \
 	git checkout fvm && \
@@ -45,4 +47,4 @@ build-go:
 
 build-all: build-rust build-go build-as
 
-.PHONY: benchmark build-rust build-as build-as-incremental build-as-minimal build-as-stub install-tinygo build-all
+.PHONY: benchmark build-rust build-as build-as-incremental build-as-minimal build-as-stub install-tinygo build-all install-llvm-ci
