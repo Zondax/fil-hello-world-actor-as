@@ -39,7 +39,8 @@ install-tinygo:
 	cd /tmp/tinygo && \
 	git checkout fvm && \
 	git submodule update --init && \
-	go install
+	go install && \
+	make wasi-libc
 
 build-go:
 	cd go-fvm-sdk/examples/hellocontract && \
