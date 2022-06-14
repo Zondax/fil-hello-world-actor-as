@@ -1,5 +1,7 @@
 install:
 	npm install -g assemblyscript
+	yarn --cwd ../ install
+	cargo install wizer --all-features
 
 benchmark:
 	mkdir -p temp
@@ -8,7 +10,7 @@ benchmark:
 	cargo r
 
 build-rust:
-	cd fil-hello-world-actor && cargo build 
+	cd fil-hello-world-actor && cargo build
 	mv fil-hello-world-actor/target/debug/wbuild/fil_hello_world_actor/fil_hello_world_actor.compact.wasm ./temp/rust-hello-world-actor.wasm
 
 build-as-incremental:
@@ -28,12 +30,19 @@ build-as-stub:
 
 build-as: build-as-incremental build-as-minimal build-as-stub
 
+install-llvm-ci:
+	echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main' | sudo tee /etc/apt/sources.list.d/llvm.list
+	wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+	sudo apt-get update
+	sudo apt-get install clang-13 llvm-13-dev lld-13 libclang-13-dev
+
 install-tinygo:
-	git clone git@github.com:ipfs-force-community/tinygo.git /tmp/tinygo
+	git clone https://github.com/ipfs-force-community/tinygo.git /tmp/tinygo
 	cd /tmp/tinygo && \
 	git checkout fvm && \
 	git submodule update --init && \
-	go install
+	go install && \
+	make wasi-libc
 
 build-go:
 	cd go-fvm-sdk/examples/hellocontract && \
@@ -41,4 +50,4 @@ build-go:
 
 build-all: build-rust build-go build-as
 
-.PHONY: benchmark build-rust build-as build-as-incremental build-as-minimal build-as-stub install-tinygo build-all
+.PHONY: benchmark build-rust build-as build-as-incremental build-as-minimal build-as-stub install-tinygo build-all install-llvm-ci
