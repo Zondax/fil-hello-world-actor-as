@@ -1,22 +1,18 @@
-import {methodNumber, usrUnhandledMsg, create} from "@zondax/fvm-as-sdk/assembly/wrappers";
-import {NO_DATA_BLOCK_ID, DAG_CBOR} from "@zondax/fvm-as-sdk/assembly/env";
-import {isConstructorCaller} from "@zondax/fvm-as-sdk/assembly/helpers";
+// @filecoinfile
+import {create} from "@zondax/fvm-as-sdk/assembly/wrappers";
+import {DAG_CBOR} from "@zondax/fvm-as-sdk/assembly/env";
 import {State} from "./state";
 
-// Entrypoint for filecoin smart contracts
-export function invoke(_: u32): u32 {
+// Function executed on create actor
+function init(): void {
+  // If we want to attach some storage to the instance,
+  // a state needs to be saved at this step.
+  // So we create a store, and call save method
+  new State(0).save()
+}
 
-  // Read invoked method number
-  const methodNum = methodNumber()
-
-  switch (u32(methodNum)) {
-    // Method number 1 is fixe for create actor command
-    case 1:
-      // Call constructor func.
-      constructor()
-      break
-
-    // Any other method is defined by the user
+function mappingMethods(methodNum:u32):i32{
+  switch (methodNum){
     case 2:
       // Execute whatever the smart contract wants.
       const msg = say_hello()
@@ -25,28 +21,9 @@ export function invoke(_: u32): u32 {
       // we need to create a block with those values, and return
       // the output of that function
       return create(DAG_CBOR, msg)
-
-    // If the method number is not implemented, an error should be retrieved
     default:
-      usrUnhandledMsg()
+      return -1
   }
-
-  return NO_DATA_BLOCK_ID
-}
-
-// Function executed on create actor
-function constructor(): void {
-  // The caller of this method should be always the same.
-  // Nobody else should call the constructor
-  if( !isConstructorCaller() ) return;
-
-  // If we want to attach some storage to the instance,
-  // a state needs to be saved at this step.
-  // So we create a store, and call save method
-  new State(0).save()
-
-  // No need to return anything
-  return;
 }
 
 // User function. Smart-contract-related function.

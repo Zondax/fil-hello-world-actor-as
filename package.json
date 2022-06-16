@@ -4,11 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node tests",
-    "asbuild:debug": "asc assembly/index.ts --target debug --bindings esm --use abort=",
-    "asbuild:release": "asc assembly/index.ts --target release --bindings esm --use abort=",
-    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
-    "start": "npx serve ."
+    "asbuild:debug": "asc assembly/index.ts --target debug --bindings esm --use abort= --transform  @zondax/fvm-as-bindgen",
+    "asbuild:release": "asc assembly/index.ts --target release --bindings esm --use abort= --transform  @zondax/fvm-as-bindgen",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release"
   },
   "repository": {
     "type": "git",
@@ -22,8 +20,9 @@
   "homepage": "https://github.com/Zondax/fil-hello-world-actor-as#readme",
   "dependencies": {
     "@zondax/assemblyscript-cbor": "^0.3.1",
+    "@zondax/fvm-as-bindgen": "0.1.1",
     "@zondax/fvm-as-sdk": "^0.2.0",
-    "assemblyscript": "^0.20.8"
+    "assemblyscript": "^0.20.11"
   },
   "type": "module",
   "exports": {

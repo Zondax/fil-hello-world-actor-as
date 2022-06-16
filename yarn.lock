@@ -7,6 +7,13 @@
   resolved "https://verdaccio.zondax.net/@zondax%2fassemblyscript-cbor/-/assemblyscript-cbor-0.3.1.tgz#ef0f2382f667e758df8ea2604e87894e33f388fb"
   integrity sha512-zj1d70d8eKZG/drSPDaQC982zCWSM2I0oLEWYK1LQ5g6bnKPdI33cniqnuzomtkGPRvKqGPx+kClfhDMkXSYDQ==
 
+"@zondax/fvm-as-bindgen@0.1.1":
+  version "0.1.1"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-bindgen/-/fvm-as-bindgen-0.1.1.tgz#5e9a3770a784a72197bba4ef4b823f7e5929dcfe"
+  integrity sha512-87KJq/X1jCkdfal2jfsI42b42m83fYXHiNHcfBW7Fr0Wy5rhl77TLLu0rDDWV60/mCj6LtgVLd2F+7QVvfsmrw==
+  dependencies:
+    assemblyscript "^0.20.11"
+
 "@zondax/fvm-as-sdk@^0.2.0":
   version "0.2.0"
   resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.2.0.tgz#e003285285a5ea493fce6aa97713b4e4c8358b86"
@@ -14,10 +21,10 @@
   dependencies:
     "@zondax/assemblyscript-cbor" "^0.3.1"
 
-assemblyscript@^0.20.8:
-  version "0.20.8"
-  resolved "https://registry.yarnpkg.com/assemblyscript/-/assemblyscript-0.20.8.tgz#77105f285e7f6aac698e2c6551547d09943daeeb"
-  integrity sha512-IFTMXMgNqi5jSlDpmuSIOPxjWy3nWzdFm4MAo7MFpZ/r6axR7hgcRMsvhDQmR8KtaOT2GCKyDUR4YvZmoNXQjg==
+assemblyscript@^0.20.11:
+  version "0.20.11"
+  resolved "https://registry.yarnpkg.com/assemblyscript/-/assemblyscript-0.20.11.tgz#cf2b0c70cc8657757673cf06cc372530ed17f73c"
+  integrity sha512-DqzqE4oVmrErlTTockRg01Hhe0HZmR8iIuudclQ6o4QFCG7lDnq9f+jgxRtNQaj12fKb17ukWmqcqvDWAXN3Gg==
   dependencies:
     binaryen "108.0.0-nightly.20220528"
     long "^5.2.0"
