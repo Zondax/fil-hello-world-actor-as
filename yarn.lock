@@ -3,38 +3,38 @@
 
 
 "@zondax/assemblyscript-cbor@^0.3.1":
-  "integrity" "sha512-zj1d70d8eKZG/drSPDaQC982zCWSM2I0oLEWYK1LQ5g6bnKPdI33cniqnuzomtkGPRvKqGPx+kClfhDMkXSYDQ=="
-  "resolved" "https://verdaccio.zondax.net/@zondax%2fassemblyscript-cbor/-/assemblyscript-cbor-0.3.1.tgz"
-  "version" "0.3.1"
+  version "0.3.1"
+  resolved "https://verdaccio.zondax.net/@zondax%2fassemblyscript-cbor/-/assemblyscript-cbor-0.3.1.tgz"
+  integrity sha512-zj1d70d8eKZG/drSPDaQC982zCWSM2I0oLEWYK1LQ5g6bnKPdI33cniqnuzomtkGPRvKqGPx+kClfhDMkXSYDQ==
 
-"@zondax/fvm-as-bindgen@0.1.2":
-  "integrity" "sha512-zZEmAUgr6zXgU4Vdd7bos1d8frabdLh29S3W85qz/nV6WlshJJlgoc+LryFdK9fFjKnhb7X+pDrU/1YNf7L5/A=="
-  "resolved" "https://verdaccio.zondax.net/@zondax%2ffvm-as-bindgen/-/fvm-as-bindgen-0.1.2.tgz"
-  "version" "0.1.2"
+"@zondax/fvm-as-bindgen@0.2.0":
+  version "0.2.0"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-bindgen/-/fvm-as-bindgen-0.2.0.tgz#8f7e86d7749e0673aba8757665d1d7291a7f4a7b"
+  integrity sha512-b7sEXt0Yv1H4uQHwflO/s/TFBDgmlWB7E0BoZMaMTJybNwc7ni25HLPpUt6YZf0EC2veIlAMRUStYTLCMp6pfA==
   dependencies:
-    "assemblyscript" "^0.20.11"
+    assemblyscript "^0.20.11"
 
 "@zondax/fvm-as-sdk@^0.2.0":
-  "integrity" "sha512-UxoFrz3ibff7PPITqLM7TPlpmbJVXYyw8hCQacCm/wEecvMwMwtyyj168sQZJxyuh8FqE2SIcyNUW/3s/Q+zww=="
-  "resolved" "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.2.0.tgz"
-  "version" "0.2.0"
+  version "0.2.0"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.2.0.tgz"
+  integrity sha512-UxoFrz3ibff7PPITqLM7TPlpmbJVXYyw8hCQacCm/wEecvMwMwtyyj168sQZJxyuh8FqE2SIcyNUW/3s/Q+zww==
   dependencies:
     "@zondax/assemblyscript-cbor" "^0.3.1"
 
-"assemblyscript@^0.20.11":
-  "integrity" "sha512-DqzqE4oVmrErlTTockRg01Hhe0HZmR8iIuudclQ6o4QFCG7lDnq9f+jgxRtNQaj12fKb17ukWmqcqvDWAXN3Gg=="
-  "resolved" "https://registry.npmjs.org/assemblyscript/-/assemblyscript-0.20.11.tgz"
-  "version" "0.20.11"
+assemblyscript@^0.20.11:
+  version "0.20.11"
+  resolved "https://registry.npmjs.org/assemblyscript/-/assemblyscript-0.20.11.tgz"
+  integrity sha512-DqzqE4oVmrErlTTockRg01Hhe0HZmR8iIuudclQ6o4QFCG7lDnq9f+jgxRtNQaj12fKb17ukWmqcqvDWAXN3Gg==
   dependencies:
-    "binaryen" "108.0.0-nightly.20220528"
-    "long" "^5.2.0"
+    binaryen "108.0.0-nightly.20220528"
+    long "^5.2.0"
 
-"binaryen@108.0.0-nightly.20220528":
-  "integrity" "sha512-9biG357fx3NXmJNotIuY9agZBcCNHP7d1mgOGaTlPYVHZE7/61lt1IyHCXAL+W5jUOYgmFZ260PR4IbD19RKuA=="
-  "resolved" "https://registry.npmjs.org/binaryen/-/binaryen-108.0.0-nightly.20220528.tgz"
-  "version" "108.0.0-nightly.20220528"
+binaryen@108.0.0-nightly.20220528:
+  version "108.0.0-nightly.20220528"
+  resolved "https://registry.npmjs.org/binaryen/-/binaryen-108.0.0-nightly.20220528.tgz"
+  integrity sha512-9biG357fx3NXmJNotIuY9agZBcCNHP7d1mgOGaTlPYVHZE7/61lt1IyHCXAL+W5jUOYgmFZ260PR4IbD19RKuA==
 
-"long@^5.2.0":
-  "integrity" "sha512-9RTUNjK60eJbx3uz+TEGF7fUr29ZDxR5QzXcyDpeSfeH28S9ycINflOgOlppit5U+4kNTe83KQnMEerw7GmE8w=="
-  "resolved" "https://registry.npmjs.org/long/-/long-5.2.0.tgz"
-  "version" "5.2.0"
+long@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/long/-/long-5.2.0.tgz"
+  integrity sha512-9RTUNjK60eJbx3uz+TEGF7fUr29ZDxR5QzXcyDpeSfeH28S9ycINflOgOlppit5U+4kNTe83KQnMEerw7GmE8w==
