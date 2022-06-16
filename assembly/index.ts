@@ -13,7 +13,7 @@ function init(paramsID:u32): void {
 }
 
 // @ts-ignore
-@filecoinmethod
+@export_method(2)
 // User function. Smart-contract-related function.
 function say_hello(paramsID:u32): u32 {
   // If we want to restore the storage related to this instance,
