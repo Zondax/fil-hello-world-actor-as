@@ -3,15 +3,7 @@ import {create} from "@zondax/fvm-as-sdk/assembly/wrappers";
 import {DAG_CBOR} from "@zondax/fvm-as-sdk/assembly/env";
 import {State} from "./state";
 
-// Function executed on create actor
-function init(): void {
-  // If we want to attach some storage to the instance,
-  // a state needs to be saved at this step.
-  // So we create a store, and call save method
-  new State(0).save()
-}
-
-function mappingMethods(methodNum:u32):i32{
+function mappingMethods(methodNum:u32, paramsID:u32):i32{
   switch (methodNum){
     case 2:
       // Execute whatever the smart contract wants.
@@ -24,6 +16,14 @@ function mappingMethods(methodNum:u32):i32{
     default:
       return -1
   }
+}
+
+// Function executed on create actor
+function init(paramsID:u32): void {
+  // If we want to attach some storage to the instance,
+  // a state needs to be saved at this step.
+  // So we create a store, and call save method
+  new State(0).save()
 }
 
 // User function. Smart-contract-related function.
@@ -43,9 +43,6 @@ function say_hello(): Uint8Array {
   const message = "Hello world " + state.count.toString()
 
   // On AssemblyScript, UTF16 is used. As filecoin uses UTF8, some encoding is required
-  const msgBuff = String.UTF8.encode(message)
-  const buff = Uint8Array.wrap(msgBuff)
-
-  // Now re can return whatever we want
-  return buff
+  // Now we can return whatever we want
+  return  Uint8Array.wrap(String.UTF8.encode(message))
 }

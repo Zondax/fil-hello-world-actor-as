@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Zondax/fil-hello-world-actor-as#readme",
   "dependencies": {
     "@zondax/assemblyscript-cbor": "^0.3.1",
-    "@zondax/fvm-as-bindgen": "0.1.1",
+    "@zondax/fvm-as-bindgen": "0.1.2",
     "@zondax/fvm-as-sdk": "^0.2.0",
     "assemblyscript": "^0.20.11"
   },
