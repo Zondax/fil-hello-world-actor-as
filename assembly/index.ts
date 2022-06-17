@@ -1,6 +1,4 @@
 // @filecoinfile
-import {create} from "@zondax/fvm-as-sdk/assembly/wrappers";
-import {DAG_CBOR} from "@zondax/fvm-as-sdk/assembly/env";
 import {State} from "./state";
 
 // @ts-ignore
@@ -15,7 +13,7 @@ function init(paramsID:u32): void {
 // @ts-ignore
 @export_method(2)
 // User function. Smart-contract-related function.
-function say_hello(paramsID:u32): u32 {
+function say_hello(paramsID:u32): Uint8Array {
   // If we want to restore the storage related to this instance,
   // we should call static load function. It will return a preloaded
   // state
@@ -34,5 +32,5 @@ function say_hello(paramsID:u32): u32 {
   // Now we can return whatever we want
   const msg = Uint8Array.wrap(String.UTF8.encode(message))
 
-  return create(DAG_CBOR, msg)
+  return msg
 }
