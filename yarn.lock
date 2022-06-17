@@ -4,30 +4,37 @@
 
 "@zondax/assemblyscript-cbor@^0.3.1":
   version "0.3.1"
-  resolved "https://verdaccio.zondax.net/@zondax%2fassemblyscript-cbor/-/assemblyscript-cbor-0.3.1.tgz#ef0f2382f667e758df8ea2604e87894e33f388fb"
+  resolved "https://verdaccio.zondax.net/@zondax%2fassemblyscript-cbor/-/assemblyscript-cbor-0.3.1.tgz"
   integrity sha512-zj1d70d8eKZG/drSPDaQC982zCWSM2I0oLEWYK1LQ5g6bnKPdI33cniqnuzomtkGPRvKqGPx+kClfhDMkXSYDQ==
+
+"@zondax/fvm-as-bindgen@^0.4.0":
+  version "0.4.0"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-bindgen/-/fvm-as-bindgen-0.4.0.tgz#7cbe8980a2ad8143564e91d007e687aa3e732926"
+  integrity sha512-ndEWK9fu3k/lsAyDJRg9pm7tnJ9neCm4mzJ92+oR9F6J2Jq2smqzC6DwhqjcTQv9nz2vU4bJd/DupmcxUUPmqA==
+  dependencies:
+    assemblyscript "^0.20.11"
 
 "@zondax/fvm-as-sdk@^0.2.0":
   version "0.2.0"
-  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.2.0.tgz#e003285285a5ea493fce6aa97713b4e4c8358b86"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.2.0.tgz"
   integrity sha512-UxoFrz3ibff7PPITqLM7TPlpmbJVXYyw8hCQacCm/wEecvMwMwtyyj168sQZJxyuh8FqE2SIcyNUW/3s/Q+zww==
   dependencies:
     "@zondax/assemblyscript-cbor" "^0.3.1"
 
-assemblyscript@^0.20.8:
-  version "0.20.8"
-  resolved "https://registry.yarnpkg.com/assemblyscript/-/assemblyscript-0.20.8.tgz#77105f285e7f6aac698e2c6551547d09943daeeb"
-  integrity sha512-IFTMXMgNqi5jSlDpmuSIOPxjWy3nWzdFm4MAo7MFpZ/r6axR7hgcRMsvhDQmR8KtaOT2GCKyDUR4YvZmoNXQjg==
+assemblyscript@^0.20.11:
+  version "0.20.11"
+  resolved "https://registry.npmjs.org/assemblyscript/-/assemblyscript-0.20.11.tgz"
+  integrity sha512-DqzqE4oVmrErlTTockRg01Hhe0HZmR8iIuudclQ6o4QFCG7lDnq9f+jgxRtNQaj12fKb17ukWmqcqvDWAXN3Gg==
   dependencies:
     binaryen "108.0.0-nightly.20220528"
     long "^5.2.0"
 
 binaryen@108.0.0-nightly.20220528:
   version "108.0.0-nightly.20220528"
-  resolved "https://registry.yarnpkg.com/binaryen/-/binaryen-108.0.0-nightly.20220528.tgz#55e50ec50dc3cded36ad02e68ec69eb69bbb1e7b"
+  resolved "https://registry.npmjs.org/binaryen/-/binaryen-108.0.0-nightly.20220528.tgz"
   integrity sha512-9biG357fx3NXmJNotIuY9agZBcCNHP7d1mgOGaTlPYVHZE7/61lt1IyHCXAL+W5jUOYgmFZ260PR4IbD19RKuA==
 
 long@^5.2.0:
   version "5.2.0"
-  resolved "https://registry.yarnpkg.com/long/-/long-5.2.0.tgz#2696dadf4b4da2ce3f6f6b89186085d94d52fd61"
+  resolved "https://registry.npmjs.org/long/-/long-5.2.0.tgz"
   integrity sha512-9RTUNjK60eJbx3uz+TEGF7fUr29ZDxR5QzXcyDpeSfeH28S9ycINflOgOlppit5U+4kNTe83KQnMEerw7GmE8w==
