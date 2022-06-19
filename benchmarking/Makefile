@@ -14,17 +14,17 @@ build-rust:
 	mv fil-hello-world-actor/target/debug/wbuild/fil_hello_world_actor/fil_hello_world_actor.compact.wasm ./temp/rust-hello-world-actor.wasm
 
 build-as-incremental:
-	cd .. && asc assembly/index.ts --target release --runtime incremental --outFile benchmarking/as-incremental-tmp.wasm --use abort=
+	cd .. && asc assembly/index.ts --target release --runtime incremental --outFile benchmarking/as-incremental-tmp.wasm --use abort= --transform  @zondax/fvm-as-bindgen
 	wizer as-incremental-tmp.wasm -f init -o ./temp/as-incremental-hello-world-actor.wasm
 	rm as-incremental-tmp.wasm
 
 build-as-minimal:
-	cd .. && asc assembly/index.ts --target release --runtime minimal --outFile benchmarking/as-minimal-tmp.wasm --use abort=
+	cd .. && asc assembly/index.ts --target release --runtime minimal --outFile benchmarking/as-minimal-tmp.wasm --use abort= --transform  @zondax/fvm-as-bindgen
 	wizer as-minimal-tmp.wasm -f init -o ./temp/as-minimal-hello-world-actor.wasm
 	rm as-minimal-tmp.wasm
 
 build-as-stub:
-	cd .. && asc assembly/index.ts --target release --runtime stub --outFile benchmarking/as-stub-tmp.wasm --use abort=
+	cd .. && asc assembly/index.ts --target release --runtime stub --outFile benchmarking/as-stub-tmp.wasm --use abort= --transform  @zondax/fvm-as-bindgen
 	wizer as-stub-tmp.wasm -f init -o ./temp/as-stub-hello-world-actor.wasm
 	rm as-stub-tmp.wasm
 
