@@ -1,9 +1,10 @@
 // @filecoinfile
+import {ParamsRawResult} from "@zondax/fvm-as-sdk/assembly/env/types"
 import {State} from "./state";
 
 // @ts-ignore
 @constructor
-function init(paramsID:u32): void {
+function init(params:ParamsRawResult): void {
   // If we want to attach some storage to the instance,
   // a state needs to be saved at this step.
   // So we create a store, and call save method
@@ -13,7 +14,7 @@ function init(paramsID:u32): void {
 // @ts-ignore
 @export_method(2)
 // User function. Smart-contract-related function.
-function say_hello(paramsID:u32): Uint8Array {
+function say_hello(params:ParamsRawResult): Uint8Array {
   // If we want to restore the storage related to this instance,
   // we should call static load function. It will return a preloaded
   // state
