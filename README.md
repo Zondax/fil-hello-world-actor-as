@@ -32,7 +32,7 @@ lotus chain invoke <address-id-from-previous-step> 2
 
 Be sure to have `Cargo` installed.
 ```
-cd testing
+cd tests/local-vm
 cargo r
 ```
 

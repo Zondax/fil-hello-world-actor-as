@@ -20,7 +20,7 @@ pub struct State {
 }
 
 fn main() {
-    println!("Testing Hello World contract in assembly script");
+    println!("tests/local-vm Hello World contract in assembly script");
 
     let mut tester = Tester::new(
         NetworkVersion::V16,

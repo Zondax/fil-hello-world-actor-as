@@ -2,7 +2,7 @@
 /build
 .idea
 .DS_Store
-testing/target
+tests/local-vm/target
 .yalc
 yalc.lock
 benchmarking/target

@@ -119,10 +119,10 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./tests/local-vm/Cargo.lock') }}
       - name: Test WASM on Rust VM
         run: |
-          cd testing
+          cd tests/local-vm
           rustup target add wasm32-unknown-unknown
           RUST_BACKTRACE=1 cargo r
       - name: Save crates
@@ -133,7 +133,7 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('./testing/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./tests/local-vm/Cargo.lock') }}
 
   benchmark:
     name: "Benchmark"
