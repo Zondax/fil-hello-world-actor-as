@@ -41,7 +41,7 @@ jobs:
           key: ${{ runner.os }}-${{ github.run_id }}
 
   test-lotus:
-    name: "Test in Lotus"
+    name: "Test with Lotus Terminal"
     needs: [build]
     timeout-minutes: 5
     runs-on: self-hosted
@@ -94,10 +94,13 @@ jobs:
 
 
   test-api:
-    name: "Test from API"
+    name: "Test with Lotus RPC"
     needs: [build]
     env:
       VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
+      NODE_URL: ${{ secrets.NODE_URL }}
+      NODE_TOKEN: ${{ secrets.NODE_TOKEN }}
+      SEED: ${{ secrets.SEED }}
     timeout-minutes: 5
     runs-on: self-hosted
     steps:
@@ -125,7 +128,7 @@ jobs:
         run: yarn tests:api
 
   test-rust-vm:
-    name: "Test in Rust VM"
+    name: "Test with Rust VM"
     needs: [build]
     timeout-minutes: 20
     runs-on: ubuntu-latest
