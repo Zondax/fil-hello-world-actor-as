@@ -96,6 +96,8 @@ jobs:
   test-api:
     name: "Test from API"
     needs: [build]
+    env:
+      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     timeout-minutes: 5
     runs-on: self-hosted
     steps:
