@@ -10,7 +10,7 @@ const URL = process.env["NODE_URL"]
 const TOKEN = process.env["NODE_TOKEN"]
 const SEED = process.env["SEED"]
 
-const WASM_ACTOR = "../build/release-final.wasm"
+const WASM_ACTOR = "../../build/release-final.wasm"
 const INIT_ACTOR_ADDRESS = "f01"
 
 const logger = log4js.getLogger()

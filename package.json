@@ -36,6 +36,7 @@
   "devDependencies": {
     "@ipld/dag-cbor": "^7.0.2",
     "@types/jest": "^28.1.2",
+    "dotenv": "^16.0.1",
     "jest": "^28.1.1",
     "log4js": "^6.5.2",
     "ts-jest": "^28.0.5",
