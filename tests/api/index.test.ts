@@ -6,14 +6,15 @@ import * as cbor from '@ipld/dag-cbor'
 
 jest.setTimeout(60000)
 
+const URL = process.env["NODE_URL"]
+const TOKEN = process.env["NODE_TOKEN"]
+const SEED = process.env["SEED"]
+
 const WASM_ACTOR = "../build/release-final.wasm"
-const URL = "http://127.0.0.1:58080/rpc/v0"
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.OqMuzGRLfI97giJdk8HaxvWx0XKJdBP2XTm1addpgWo"
 const INIT_ACTOR_ADDRESS = "f01"
-const SEED = "when pepper bicycle beef jacket subject document obey lyrics flee tomorrow inspire public broccoli gym small attack trophy cycle wrestle electric approve inflict pull"
 
 const logger = log4js.getLogger()
-logger.level = "TRACE"
+logger.level = process.env["LOG_LEVEL"] || "TRACE"
 
 test("Install actor", async () => {
     const code = fs.readFileSync(path.join(__dirname,WASM_ACTOR))
