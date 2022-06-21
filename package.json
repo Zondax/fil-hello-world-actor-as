@@ -6,7 +6,8 @@
   "scripts": {
     "asbuild:debug": "asc assembly/index.ts --target debug --bindings esm --use abort= --transform  @zondax/fvm-as-bindgen",
     "asbuild:release": "asc assembly/index.ts --target release --bindings esm --use abort= --transform  @zondax/fvm-as-bindgen",
-    "asbuild": "npm run asbuild:debug && npm run asbuild:release"
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "tests:api": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/Zondax/fil-hello-world-actor-as#readme",
   "dependencies": {
     "@zondax/assemblyscript-cbor": "^0.3.1",
+    "@zondax/filecoin-signing-tools": "^1.0.0-rc2",
     "@zondax/fvm-as-bindgen": "^0.5.0",
     "@zondax/fvm-as-sdk": "^0.4.1",
     "assemblyscript": "^0.20.11"
@@ -30,5 +32,14 @@
       "import": "./build/release.js",
       "types": "./build/release.d.ts"
     }
+  },
+  "devDependencies": {
+    "@ipld/dag-cbor": "^7.0.2",
+    "@types/jest": "^28.1.2",
+    "jest": "^28.1.1",
+    "log4js": "^6.5.2",
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
   }
 }

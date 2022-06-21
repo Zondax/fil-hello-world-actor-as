@@ -93,6 +93,31 @@ jobs:
           lotus chain get $head
 
 
+  test-api:
+    name: "Test from API"
+    needs: [build]
+    timeout-minutes: 5
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache/restore binaries
+        uses: actions/cache@v1
+        with:
+          path: ./build
+          key: ${{ runner.os }}-${{ github.run_id }}
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Set npmrc
+        run: |
+          yarn config set @zondax:registry https://verdaccio.zondax.net/
+          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
+          npm config set //verdaccio.zondax.net/:always-auth true
+      - name: Install dependencies
+        run: yarn install
+      - name: Run tests
+        run: yarn tests:api
+
   test-rust-vm:
     name: "Test in Rust VM"
     needs: [build]

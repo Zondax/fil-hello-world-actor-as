@@ -1,0 +1,5 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,                      /* Specify how TypeScript looks up a file from a given module specifier. */
+  }
+}
