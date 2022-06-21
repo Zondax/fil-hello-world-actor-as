@@ -12,6 +12,8 @@ const SEED = process.env["SEED"]
 
 const WASM_ACTOR = "../../build/release-final.wasm"
 const INIT_ACTOR_ADDRESS = "f01"
+const INIT_ACTOR_INSTALL_METHOD = 3
+const INIT_ACTOR_CREATE_METHOD = 2
 
 const logger = log4js.getLogger()
 logger.level = process.env["LOG_LEVEL"] || "TRACE"
@@ -42,7 +44,7 @@ test("Install actor", async () => {
         From:   keys.address,
         To: INIT_ACTOR_ADDRESS,
         Value:  "0",
-        Method: 3,
+        Method: INIT_ACTOR_INSTALL_METHOD,
         Params: Buffer.from(params).toString('base64'),
         Nonce: nonce,
         GasFeeCap: "0",
@@ -123,7 +125,7 @@ test("Create actor", async () => {
         From:   keys.address,
         To: INIT_ACTOR_ADDRESS,
         Value:  "0",
-        Method: 2,
+        Method: INIT_ACTOR_CREATE_METHOD,
         Params: Buffer.from(params).toString('base64'),
         Nonce: nonce,
         GasFeeCap: "0",
