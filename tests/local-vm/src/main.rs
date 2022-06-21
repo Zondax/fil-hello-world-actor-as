@@ -11,7 +11,7 @@ use fvm_shared::bigint::BigInt;
 use std::env;
 
 const WASM_COMPILED_PATH: &str =
-    "../build/release-final.wasm";
+    "../../build/release-final.wasm";
 
 /// The state object.
 #[derive(Serialize_tuple, Deserialize_tuple, Clone, Debug, Default)]
@@ -20,7 +20,7 @@ pub struct State {
 }
 
 fn main() {
-    println!("Testing Hello World contract in assembly script");
+    println!("tests/local-vm Hello World contract in assembly script");
 
     let mut tester = Tester::new(
         NetworkVersion::V16,
