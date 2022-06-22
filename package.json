@@ -7,7 +7,7 @@
     "asbuild:debug": "asc assembly/index.ts --target debug --bindings esm --use abort= --transform  @zondax/fvm-as-bindgen",
     "asbuild:release": "asc assembly/index.ts --target release --bindings esm --use abort= --transform  @zondax/fvm-as-bindgen",
     "asbuild": "npm run asbuild:debug && npm run asbuild:release",
-    "tests:api": "jest --runInBand"
+    "tests:rpc": "jest --runInBand"
   },
   "repository": {
     "type": "git",
