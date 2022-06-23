@@ -22,7 +22,7 @@
   "dependencies": {
     "@zondax/assemblyscript-cbor": "^0.3.1",
     "@zondax/filecoin-signing-tools": "^1.0.1",
-    "@zondax/fvm-as-bindgen": "^0.5.0",
+    "@zondax/fvm-as-bindgen": "file:.yalc/@zondax/fvm-as-bindgen",
     "@zondax/fvm-as-sdk": "^0.4.1",
     "assemblyscript": "^0.20.11"
   },

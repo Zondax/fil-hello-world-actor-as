@@ -1,4 +1,4 @@
-// @filecoinfile
+// @chainfile-index
 import {ParamsRawResult} from "@zondax/fvm-as-sdk/assembly/env/types"
 import {State} from "./state";
 
