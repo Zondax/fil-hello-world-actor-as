@@ -40,20 +40,17 @@ export const install = async (address: string, priv_key: string, params: Uint8Ar
         GasLimit: 0
     }
 
-    try {
-        const fees = (await filRPC.getGasEstimation({...tx}))
-        logger.trace(`Fees: ${JSON.stringify(fees)}`)
+    const fees = (await filRPC.getGasEstimation({...tx}))
+    logger.trace(`Fees: ${JSON.stringify(fees)}`)
 
-        const { GasFeeCap, GasPremium, GasLimit } = fees.result
-        tx = {
-            ...tx,
-            GasFeeCap,
-            GasPremium,
-            GasLimit
-        }
-    }catch(err){
-        logger.error(`Error fetching fees: ${JSON.stringify(err.response.data)}`)
-        return
+    if( fees && fees.error ) throw new Error( `error code ${fees.error.code } - ${fees.error.message}` )
+
+    const { GasFeeCap, GasPremium, GasLimit } = fees.result
+    tx = {
+        ...tx,
+        GasFeeCap,
+        GasPremium,
+        GasLimit
     }
 
     const signedTx = transactionSign(tx, priv_key )

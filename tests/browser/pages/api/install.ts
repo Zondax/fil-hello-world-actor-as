@@ -32,8 +32,9 @@ const handler = nc()
               res.statusCode = 200
               res.end(JSON.stringify({cid: cid.toString(), installed: isInstalled}))
           }
-      }catch(err){
-          console.log(err)
+      }catch(err: any){
+          res.statusCode = 400
+          res.end(JSON.stringify({errorMessage: err.toString()}))
       }
   })
 
