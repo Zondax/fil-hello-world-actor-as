@@ -10,9 +10,5 @@ import { BaseState } from "@zondax/fvm-as-sdk/assembly/utils/state";
 // @ts-ignore
 export class State extends BaseState {
   // In this case, we only keep a counter
-  msg: string;
   count: u64;
-  decimal: f32;
-  arr: Array<string>;
-  map: Map<string, u64>;
 }
