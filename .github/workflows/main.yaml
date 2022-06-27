@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     name: "Build"
-    timeout-minutes: 5
+    timeout-minutes: 10
     runs-on: self-hosted
     env:
       VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
