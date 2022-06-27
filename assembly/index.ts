@@ -8,7 +8,8 @@ function init(params:ParamsRawResult): void {
   // If we want to attach some storage to the instance,
   // a state needs to be saved at this step.
   // So we create a store, and call save method
-  new State(0).save()
+// @ts-ignore
+  State.defaultState().save()
 }
 
 // @ts-ignore
@@ -18,6 +19,7 @@ function say_hello(params:ParamsRawResult): Uint8Array {
   // If we want to restore the storage related to this instance,
   // we should call static load function. It will return a preloaded
   // state
+// @ts-ignore
   const state = State.load();
 
   // Do some stuff with the state
