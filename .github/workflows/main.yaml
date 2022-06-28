@@ -30,6 +30,7 @@ jobs:
           npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
+          apt install make
           yarn install
           make deps
       - name: Build WASM file
@@ -126,6 +127,44 @@ jobs:
         run: yarn install
       - name: Run tests rpc
         run: yarn tests:rpc
+
+
+
+
+  test-web-page:
+    name: "Test web page"
+    needs: [build]
+    env:
+      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
+      NODE_URL: ${{ secrets.NODE_URL }}
+      NODE_TOKEN: ${{ secrets.NODE_TOKEN }}
+      SEED: ${{ secrets.SEED }}
+    timeout-minutes: 5
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
+      - name: Cache/restore binaries
+        uses: actions/cache@v1
+        with:
+          path: ./build
+          key: ${{ runner.os }}-${{ github.run_id }}
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Set npmrc
+        run: |
+          yarn config set @zondax:registry https://verdaccio.zondax.net/
+          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
+          npm config set //verdaccio.zondax.net/:always-auth true
+      - name: Run tests
+        run: | 
+          cd tests/browser
+          yarn install
+          yarn build   
 
   test-rust-vm:
     name: "Test with Rust VM"
