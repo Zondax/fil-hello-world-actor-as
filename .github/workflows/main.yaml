@@ -161,9 +161,9 @@ jobs:
           npm config set //verdaccio.zondax.net/:always-auth true
       - name: Run tests rpc
         run: | 
-        cd tests/browser
-        yarn install
-        yarn build
+          cd tests/browser
+          yarn install
+          yarn build   
 
   test-rust-vm:
     name: "Test with Rust VM"
