@@ -9,3 +9,4 @@ benchmarking/target
 benchmarking/temp
 benchmarking/benchmark_results.csv
 .env
+*.out
