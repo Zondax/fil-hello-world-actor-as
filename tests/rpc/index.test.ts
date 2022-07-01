@@ -212,9 +212,13 @@ test("Invoke method 2", async () => {
 
     if (sentTx.result.Receipt.ExitCode == 0) {
       const respBuffer = Buffer.from(sentTx.result.Receipt.Return, "base64");
+      const resp: any = cbor.decode(Uint8Array.from(respBuffer));
 
-      logger.info(`Message: [${respBuffer.toString()}]`);
-      expect(respBuffer.toString()).toBe(`Hello world ${callNum}`);
+      logger.info(`Message: [${JSON.stringify(resp)}]`);
+
+      expect(resp instanceof Array).toBe(true);
+      expect(resp.length).toBe(1);
+      expect(resp[0]).toBe(`Hello world ${callNum}`);
     }
   }
 });
