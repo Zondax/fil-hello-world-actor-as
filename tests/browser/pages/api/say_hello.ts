@@ -26,9 +26,10 @@ const handler = nc()
 
       if (sentTx.result.Receipt.ExitCode == 0) {
         const respBuffer = Buffer.from(sentTx.result.Receipt.Return, "base64");
+        const message = cbor.decode(Uint8Array.from(respBuffer));
 
         res.statusCode = 200;
-        res.end(JSON.stringify({ message: respBuffer.toString() }));
+        res.end(JSON.stringify({ message: message[0] }));
       }
     } catch (err) {
       console.log(err);
