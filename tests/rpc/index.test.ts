@@ -247,5 +247,6 @@ async function getFee(filRPC, tx) {
     return tx;
   } catch (err) {
     logger.error(`Error fetching fees: ${JSON.stringify(err)}`);
+    throw err;
   }
 }
