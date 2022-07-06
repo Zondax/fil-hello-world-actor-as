@@ -30,7 +30,6 @@ jobs:
           npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
-          apt install make
           yarn install
           make deps
       - name: Build WASM file
