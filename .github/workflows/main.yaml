@@ -6,7 +6,7 @@ jobs:
   build:
     name: "Build"
     timeout-minutes: 10
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     steps:
