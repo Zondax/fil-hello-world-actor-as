@@ -21,6 +21,15 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: Restore crates
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./Makefile') }}
       - name: Install yarn
         run: npm install -g yarn
       - name: Set npmrc
@@ -39,59 +48,15 @@ jobs:
         with:
           path: ./build
           key: ${{ runner.os }}-${{ github.run_id }}
-
-  test-lotus:
-    name: "Test with Lotus Terminal"
-    needs: [build]
-    timeout-minutes: 5
-    runs-on: self-hosted
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache/restore binaries
-        uses: actions/cache@v1
+      - name: Save crates
+        uses: actions/cache@v3
         with:
-          path: ./build
-          key: ${{ runner.os }}-${{ github.run_id }}
-      - name: Install Hello Actor in Lotus
-        run: |
-          lotus version
-          lotus chain install-actor build/release-final.wasm >> install.txt
-          cat install.txt
-      - name: Create Hello Actor in Lotus
-        run: |
-          cid=$(sed -n 's/^Actor Code CID: //p' install.txt)
-          echo $cid
-          lotus chain create-actor $cid >> create.txt
-          cat create.txt
-      - name: Get status actor
-        run: |
-          address=$(sed -n 's/^ID Address: //p' create.txt)
-          echo $address
-          lotus state get-actor $address >> actor.txt
-          cat actor.txt
-      - name: Get chain state
-        run: |
-          head=$(sed -n 's/^Head:		//p' actor.txt)
-          echo $head
-          lotus chain get $head
-      - name: Invoke actor's method 2
-        run: |
-          address=$(sed -n 's/^ID Address: //p' create.txt)
-          lotus chain invoke $address 2
-      - name: Get status actor
-        run: |
-          address=$(sed -n 's/^ID Address: //p' create.txt)
-          echo $address
-          rm actor.txt
-          lotus state get-actor $address >> actor.txt
-          cat actor.txt
-      - name: Get chain state
-        run: |
-          head=$(sed -n 's/^Head:		//p' actor.txt)
-          echo $head
-          lotus chain get $head
-
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('./Makefile') }}
 
   test-api:
     name: "Test with Lotus RPC"
@@ -102,7 +67,7 @@ jobs:
       NODE_TOKEN: ${{ secrets.NODE_TOKEN }}
       SEED: ${{ secrets.SEED }}
     timeout-minutes: 5
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -127,9 +92,6 @@ jobs:
       - name: Run tests rpc
         run: yarn tests:rpc
 
-
-
-
   test-web-page:
     name: "Test web page"
     needs: [build]
@@ -139,7 +101,7 @@ jobs:
       NODE_TOKEN: ${{ secrets.NODE_TOKEN }}
       SEED: ${{ secrets.SEED }}
     timeout-minutes: 5
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
