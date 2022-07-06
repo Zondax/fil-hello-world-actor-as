@@ -725,10 +725,10 @@
     leb128 "0.0.5"
     secp256k1 "^4.0.3"
 
-"@zondax/fvm-as-bindgen@^0.8.0":
-  version "0.8.0"
-  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-bindgen/-/fvm-as-bindgen-0.8.0.tgz#cafe4ced0df7e63d94f3cb8e8d29c032ccf51766"
-  integrity sha512-t4FakNOF6KpcCMG/XCfu9Q28Iaz9lzsulXTsTJ4tH0/0AwJq0MT4deSdBQw8Azq4PNWiZl54IesyWYpN9hz+zA==
+"@zondax/fvm-as-bindgen@^0.9.1":
+  version "0.9.1"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-bindgen/-/fvm-as-bindgen-0.9.1.tgz#adb995d5e7913c6b8e98ce2cfeb4b5edc17c2cf0"
+  integrity sha512-tMkOV0Z5m5zWy1tE6vGvgjULob7rLTf+ckRSnIjpS+s/WNqH18+njUHDsJAa0yxSfVTLFQb0JSzUU7LxEHSTug==
   dependencies:
     assemblyscript "^0.20.11"
 

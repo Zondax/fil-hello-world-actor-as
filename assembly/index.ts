@@ -1,4 +1,3 @@
-// @chainfile-index
 import {State} from "./state";
 
 // @ts-ignore
