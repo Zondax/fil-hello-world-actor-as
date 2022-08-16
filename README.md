@@ -3,31 +3,62 @@
 [![GithubActions](https://github.com/Zondax/fil-hello-world-actor-as/actions/workflows/main.yaml/badge.svg)](https://github.com/Zondax/fil-hello-world-actor-as/blob/master/.github/workflows/main.yaml)
 
 
-This smart contract was built using the FVM SDK for AssemblyScript. Please, go to the [project](https://github.com/Zondax/fvm-as-sdk) in order to know more about it.
+## Introduction
+This is the first smart contract you should check in order to learn how to create your own one. It implements:
+- Save a counter to storage
+- Load data from storage
+- Create a constructor
+- Export a basic method
 
-# Tests 
+It was built using the FVM SDK for AssemblyScript. Please, go to the [project](https://github.com/Zondax/fvm-as-sdk) in order to know more about it.
 
-### On Lotus node
-In order to run it on a lotus node, first you will need to deploy one. 
-
-The following instructions can be used to build this project locally, copy the binary to a pod running on k8s, and run it.
-
-
-#### Build and connect to pod
+## Build
+You just need to run these two steps:
 ```
 make deps
 make build
+```
+The binary file you need to use it `release-final.wasm`.
+
+## Deploy
+
+In order to run it on a lotus node, first you will need to deploy one. Please, refer to [this repo](https://github.com/Zondax/rosetta-filecoin/tree/experimental/dev-fmv-m2).
+
+### On Lotus node
+#### Copy binary to pod
+```
 kubectl config use-context sandbox
 kubectl -n filecoin-node cp build/final-release.wasm <pod-name>:/tmp/fil-actor-hello-world-as.wasm
 ```
-
-#### To install and execute the actor
+#### To install and instantiate the actor
 ```
-kubectl exec -it -n <namespace> <pod-name> -- bash
-lotus chain install-actor /tmp/fil-actor-hello-world-as.wasm
+lotus chain install-actor <path-to-binary>
 lotus chain create-actor <actor-id-from-previous-step>
-lotus chain invoke <address-id-from-previous-step> 2
 ```
+
+### Using the web page
+On the `tests/browser` folder, you will find a web page ready to allow you to interact with the smart contract. In order to 
+run it, please you need to set the an `.env` file with the required values. And now run:
+```
+yarn install
+yarn dev
+```
+
+A web server will be listening to requests on `localhost:3000`.
+
+## Tests 
+
+### On Lotus node
+
+#### Run say_hello method
+```
+lotus chain invoke <address-id-from-create-actor-step> 2
+```
+
+### Using the web page
+Please, follow the flow the web page offers you in order to run the say_hello method. 
+The only thing you need to keep in mind is the fact you will need to install and instantiate 
+the smart contract first.
 
 ### On Rust VM
 
@@ -37,26 +68,7 @@ cd tests/local-vm
 cargo r
 ```
 
-## Docs
-
-### IPFS
-- https://medium.com/coinmonks/ipld-hands-on-tutorial-in-golang-15fff6bfe39d
-- https://medium.com/hackernoon/understanding-ipfs-in-depth-1-5-a-beginner-to-advanced-guide-e937675a8c8a
-- https://medium.com/hackernoon/understanding-ipfs-in-depth-4-6-what-is-multiformats-cf25eef83966
-
-### Related
-- https://proto.school/content-addressing
-- https://proto.school/merkle-dags
-- https://multiformats.io/multihash/
-- https://github.com/multiformats/multicodec/blob/master/table.csv
-
-## Other examples
-
-### Rust: Hello world
-
-- https://github.com/raulk/fil-hello-world-actor
-
-### GoLang: Hello world
-
-- https://github.com/ipfs-force-community/go-fvm-sdk
+## Implementations on other SDKs
+- [Rust](https://github.com/raulk/fil-hello-world-actor)
+- [GoLang](https://github.com/ipfs-force-community/go-fvm-sdk)
 
