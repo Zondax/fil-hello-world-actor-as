@@ -44,7 +44,9 @@ yarn install
 yarn dev
 ```
 
-A web server will be listening to requests on `localhost:3000`.
+A web server will be listening to requests on `localhost:3000`. In order to install and instantiate the smart contract, please follow these to steps:
+
+![Install and create](./docs/assets/install_create.png)
 
 ## Tests 
 
@@ -59,6 +61,8 @@ lotus chain invoke <address-id-from-create-actor-step> 2
 Please, follow the flow the web page offers you in order to run the say_hello method. 
 The only thing you need to keep in mind is the fact you will need to install and instantiate 
 the smart contract first.
+
+![Run](./docs/assets/run.png)
 
 ### On Rust VM
 
