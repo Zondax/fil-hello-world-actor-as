@@ -725,20 +725,20 @@
     leb128 "0.0.5"
     secp256k1 "^4.0.3"
 
-"@zondax/fvm-as-bindgen@^0.9.1":
-  version "0.9.1"
-  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-bindgen/-/fvm-as-bindgen-0.9.1.tgz#adb995d5e7913c6b8e98ce2cfeb4b5edc17c2cf0"
-  integrity sha512-tMkOV0Z5m5zWy1tE6vGvgjULob7rLTf+ckRSnIjpS+s/WNqH18+njUHDsJAa0yxSfVTLFQb0JSzUU7LxEHSTug==
+"@zondax/fvm-as-bindgen@^0.13.0":
+  version "0.13.0"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-bindgen/-/fvm-as-bindgen-0.13.0.tgz#e7335707b94177aea4fb641a4a3138b36411cf4d"
+  integrity sha512-pxxrgNj8XMzQpRmK8k/0z/EEEIczlCzjho5OiikX6siFW+jrN1R0q3NU6OdYcUtQIxPjdlWfWXYz1E3fDuzkdg==
   dependencies:
     assemblyscript "^0.20.11"
 
-"@zondax/fvm-as-sdk@^0.5.1":
-  version "0.5.1"
-  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.5.1.tgz#33d8905b4707bd8f658a237606717a3845aabcd8"
-  integrity sha512-XLvN0awsSTbaIaLme4V3xfwu5P0gnwI4ezPVuP3ZXyNjTrscXdpxRYV0q1wZy8O5mAiqEM0KYwDsQlcA3WXFog==
+"@zondax/fvm-as-sdk@^0.6.3":
+  version "0.6.3"
+  resolved "https://verdaccio.zondax.net/@zondax%2ffvm-as-sdk/-/fvm-as-sdk-0.6.3.tgz#80f95cb159e03adf3525dee23460d51357b5ce18"
+  integrity sha512-KeUhCnIeQ54SJohyQZ3n/BnUE9uIMbLsuitgHObGoU2Lf397h+XwmXQ3UUkaQ0jMJlWegjhX5j0o5P/jL+Xixg==
   dependencies:
     "@zondax/assemblyscript-cbor" "^0.5.0"
-    as-bigint "^0.5.3"
+    as-bignum "^0.2.18"
 
 acorn-walk@^8.1.1:
   version "8.2.0"
@@ -801,10 +801,10 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
-as-bigint@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/as-bigint/-/as-bigint-0.5.3.tgz#a0647d0b7ce835077aca33115e71eb26a83df8be"
-  integrity sha512-tg9iTO/vPeovOM5CSk1WxYcsfBd/cd3twhBW5PrpcGUfiSEXlPB69eOxFKvSbZnpuDxBAyQ4YBgEkfnYL89Czw==
+as-bignum@^0.2.18:
+  version "0.2.23"
+  resolved "https://registry.yarnpkg.com/as-bignum/-/as-bignum-0.2.23.tgz#626e358721504291d35db4ce5c80693630048ad3"
+  integrity sha512-0+GiwHNwyw0lXI+6uzOI6ReNOEsqKihdLJuOYJeqEOfXcIqwtSixLcQ7h9UQaMrroktW/Idmqj2TinpcWTxxJA==
 
 assemblyscript@^0.20.11:
   version "0.20.11"
