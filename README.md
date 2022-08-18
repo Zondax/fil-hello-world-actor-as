@@ -3,6 +3,15 @@
 [![GithubActions](https://github.com/Zondax/fil-hello-world-actor-as/actions/workflows/main.yaml/badge.svg)](https://github.com/Zondax/fil-hello-world-actor-as/blob/master/.github/workflows/main.yaml)
 
 
+---
+
+![zondax_light](docs/zondax_light.png#gh-light-mode-only)
+![zondax_dark](docs/zondax_dark.png#gh-dark-mode-only)
+
+_Please visit our website at [zondax.ch](https://www.zondax.ch)_
+
+---
+
 ## Introduction
 This is the first smart contract you should check in order to learn how to create your own one. It implements:
 - Save a counter to storage
