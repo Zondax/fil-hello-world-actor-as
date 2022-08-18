@@ -7,8 +7,6 @@ jobs:
     name: "Build"
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    env:
-      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -32,11 +30,6 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('./Makefile') }}
       - name: Install yarn
         run: npm install -g yarn
-      - name: Set npmrc
-        run: |
-          yarn config set @zondax:registry https://verdaccio.zondax.net/
-          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
           yarn install
@@ -62,7 +55,6 @@ jobs:
     name: "Test with Lotus RPC"
     needs: [build]
     env:
-      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
       NODE_URL: ${{ secrets.NODE_URL }}
       NODE_TOKEN: ${{ secrets.NODE_TOKEN }}
       SEED: ${{ secrets.SEED }}
@@ -82,11 +74,6 @@ jobs:
           key: ${{ runner.os }}-${{ github.run_id }}
       - name: Install yarn
         run: npm install -g yarn
-      - name: Set npmrc
-        run: |
-          yarn config set @zondax:registry https://verdaccio.zondax.net/
-          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: yarn install
       - name: Run tests rpc
@@ -96,7 +83,6 @@ jobs:
     name: "Test web page"
     needs: [build]
     env:
-      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
       NODE_URL: ${{ secrets.NODE_URL }}
       NODE_TOKEN: ${{ secrets.NODE_TOKEN }}
       SEED: ${{ secrets.SEED }}
@@ -116,11 +102,6 @@ jobs:
           key: ${{ runner.os }}-${{ github.run_id }}
       - name: Install yarn
         run: npm install -g yarn
-      - name: Set npmrc
-        run: |
-          yarn config set @zondax:registry https://verdaccio.zondax.net/
-          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Run tests
         run: | 
           cd tests/browser
@@ -174,8 +155,6 @@ jobs:
     needs: [build]
     timeout-minutes: 30
     runs-on: ubuntu-latest
-    env:
-      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -199,11 +178,6 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
           key: ${{ runner.os }}-cargo-${{ hashFiles('./benchmarking/Cargo.lock') }}
-      - name: Set npmrc
-        run: |
-          yarn config set @zondax:registry https://verdaccio.zondax.net/
-          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Test WASM on Rust VM
         run: |
           cd benchmarking

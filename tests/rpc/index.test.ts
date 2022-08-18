@@ -1,9 +1,10 @@
 import {
-  FilecoinRPC,
   transactionSign,
   generateMnemonic,
   keyDerive,
 } from "@zondax/filecoin-signing-tools/js";
+import FilecoinRPC from "@zondax/filecoin-signing-tools/rpc";
+
 import fs from "fs";
 import log4js from "log4js";
 import path from "path";
