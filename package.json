@@ -21,7 +21,7 @@
   "homepage": "https://github.com/Zondax/fil-hello-world-actor-as#readme",
   "dependencies": {
     "@zondax/assemblyscript-cbor": "^1.0.0",
-    "@zondax/filecoin-signing-tools": "^1.0.1",
+    "@zondax/filecoin-signing-tools": "1.0.4",
     "@zondax/fvm-as-bindgen": "^1.0.0",
     "@zondax/fvm-as-sdk": "^1.0.0",
     "assemblyscript": "^0.20.11"
