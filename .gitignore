@@ -10,3 +10,4 @@ benchmarking/temp
 benchmarking/benchmark_results.csv
 .env
 *.out
+yarn.lock
